@@ -23,3 +23,5 @@ To work with the database correctly & pull it from github you need to follow the
 7. Choose the path of the file you want to import
 8. Click "Next"
 9. Click "Finish"
+
+For reference check this [link.](https://www.youtube.com/watch?v=XLzV_gagkZc)
