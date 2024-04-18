@@ -1,5 +1,31 @@
 import pyodbc
 
+def insert_into_table(table_name, values):
+    cursor = None
+    conn = None
+    try:
+        conn = pyodbc.connect('Driver={SQL Server};'
+                               'Server=.;'
+                               'Database=Criminal Investigation System;'
+                               'Trusted_Connection=yes;')
+        cursor = conn.cursor()
+
+        # Construct the SQL query dynamically
+        placeholders = ','.join(['?' for _ in range(len(values[0]))])
+        query = f'INSERT INTO {table_name} VALUES ({placeholders})'
+        
+        cursor.executemany(query, values)
+        conn.commit()
+        print("Values inserted into", table_name, "successfully.")
+
+    except pyodbc.Error as e:
+        print("Error inserting values into", table_name + ":", e)
+
+    finally:
+        if cursor:
+            cursor.close()  
+        if conn:
+            conn.close()
 
 def get_all_ids(table_name, primary_keys):
     ids = []
@@ -47,30 +73,13 @@ class Suspect:
         self.AddressZIP = AddressZIP
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Suspect (SuspectID, FirstName, LastName, Gender, DateOfBirth, PhoneRecord, AddressStreet, AddressGovernment, AddressZIP)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (self.SuspectID, self.FirstName, self.LastName, self.Gender, self.DateOfBirth, self.PhoneRecord, self.AddressStreet, self.AddressGovernment, self.AddressZIP))
-
-            conn.commit()
+            values = (self.SuspectID, self.FirstName, self.LastName, self.Gender, self.DateOfBirth, self.PhoneRecord, self.AddressStreet, self.AddressGovernment, self.AddressZIP)
+            insert_into_table("Suspect", [values])
             print("Suspect inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Suspect:", e)
-
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
     
     
 class Criminal:
@@ -82,63 +91,29 @@ class Criminal:
         self.Description = Description
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Criminal (CriminalID, FirstName, LastName, Status, Description)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (self.CriminalID, self.FirstName, self.LastName, self.Status, self.Description))
-
-            conn.commit()
+            values = (self.CriminalID, self.FirstName, self.LastName, self.Status, self.Description)
+            insert_into_table("Criminal", [values])
             print("Criminal inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Criminal:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 class CriminalRecord:
     
     def __init__(self, SuspectID, CriminalID, CrimeRecord):
         self.SuspectID = SuspectID
         self.CriminalID = CriminalID
         self.CrimeRecord = CrimeRecord
-
     def insert_into_database(self):
-        cursor = None 
-
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO CriminalRecord (SuspectID, CriminalID, CrimeRecord)
-                VALUES (?, ?, ?)
-            ''', (self.SuspectID, self.CriminalID, self.CrimeRecord))
-
-            conn.commit()
+            values = (self.SuspectID, self.CriminalID, self.CrimeRecord)
+            insert_into_table("CriminalRecord", [values])
             print("CriminalRecord inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting CriminalRecord:", e)
-
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
+    
 
 class Case:
     def __init__(self, CaseID, StartDate, EndDate, Description, Status, OfficerID):
@@ -150,30 +125,14 @@ class Case:
         self.OfficerID = OfficerID
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Case1 (CaseID, StartDate, EndDate, Description, Status, OfficerID)
-                VALUES (?, ?, ?, ?, ?, ?)
-            ''', (self.CaseID, self.StartDate, self.EndDate, self.Description, self.Status, self.OfficerID))
-
-            conn.commit()
+            values = (self.CaseID, self.StartDate, self.EndDate, self.Description, self.Status, self.OfficerID)
+            insert_into_table("Case", [values])
             print("Case inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Case:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 
 
@@ -184,30 +143,13 @@ class CrimeScene:
         self.Location = Location
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO CrimeScene (CaseID, Time, Location)
-                VALUES (?, ?, ?)
-            ''', (self.CaseID, self.Time, self.Location))
-
-            conn.commit()
+            values = (self.CaseID, self.Time, self.Location)
+            insert_into_table("CrimeScene", [values])
             print("CrimeScene inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting CrimeScene:", e)
-
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Evidence:
     def __init__(self, CaseID, Type, Description):
@@ -216,30 +158,14 @@ class Evidence:
         self.Description = Description
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Evidence (CaseID, Type, Description)
-                VALUES (?, ?, ?)
-            ''', (self.CaseID, self.Type, self.Description))
-
-            conn.commit()
+            values = (self.CaseID, self.Type, self.Description)
+            insert_into_table("Evidence", [values])
             print("Evidence inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Evidence:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Witness:
     def __init__(self, WitnessID, FirstName, LastName, DateOfBirth, Gender, Age, Address, PhoneNumber, Email):
@@ -254,30 +180,14 @@ class Witness:
         self.Email = Email
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Witness1 (WitnessID, FirstName, LastName, DateOfBirth, Gender, Age, Address, PhoneNumber, Email)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (self.WitnessID, self.FirstName, self.LastName, self.DateOfBirth, self.Gender, self.Age, self.Address, self.PhoneNumber, self.Email))
-
-            conn.commit()
+            values = (self.WitnessID, self.FirstName, self.LastName, self.DateOfBirth, self.Gender, self.Age, self.Address, self.PhoneNumber, self.Email)
+            insert_into_table("Witness1", [values])
             print("Witness inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Witness:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Victim:
     def __init__(self, VictimID, FirstName, LastName, DateOfBirth, Age, Gender, Address, PhoneNumber, Injuries):
@@ -292,30 +202,14 @@ class Victim:
         self.Injuries = Injuries
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Victim (VictimID, FirstName, LastName, DateOfBirth, Age, Gender, Address, PhoneNumber, Injuries)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (self.VictimID, self.FirstName, self.LastName, self.DateOfBirth, self.Age, self.Gender, self.Address, self.PhoneNumber, self.Injuries))
-
-            conn.commit()
+            values = (self.VictimID, self.FirstName, self.LastName, self.DateOfBirth, self.Age, self.Gender, self.Address, self.PhoneNumber, self.Injuries)
+            insert_into_table("Victim", [values])
             print("Victim inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Victim:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Officer:
     def __init__(self, OfficerID, FirstName, LastName, DateOfBirth, Gender, BadgeNumber, Rank, SupervisorID, Email, PhoneNumber):
@@ -331,30 +225,13 @@ class Officer:
         self.PhoneNumber = PhoneNumber
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Officer (OfficerID, FirstName, LastName, DateOfBirth, Gender, BadgeNumber, Rank, SupervisorID, Email, PhoneNumber)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (self.OfficerID, self.FirstName, self.LastName, self.DateOfBirth, self.Gender, self.BadgeNumber, self.Rank, self.SupervisorID, self.Email, self.PhoneNumber))
-
-            conn.commit()
+            values = (self.OfficerID, self.FirstName, self.LastName, self.DateOfBirth, self.Gender, self.BadgeNumber, self.Rank, self.SupervisorID, self.Email, self.PhoneNumber)
+            insert_into_table("Officer", [values])
             print("Officer inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Officer:", e)
-
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class PoliceStation:
     def __init__(self, StationID, Name, Location, Telephone, StationChief):
@@ -365,30 +242,14 @@ class PoliceStation:
         self.StationChief = StationChief
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO PoliceStation (StationID, Name, Location, Telephone, StationChief)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (self.StationID, self.Name, self.Location, self.Telephone, self.StationChief))
-
-            conn.commit()
+            values = (self.StationID, self.Name, self.Location, self.Telephone, self.StationChief)
+            insert_into_table("PoliceStation", [values])
             print("PoliceStation inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting PoliceStation:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Arrest:
     def __init__(self, OfficerID, CaseID, ArrestDate):
@@ -397,30 +258,14 @@ class Arrest:
         self.ArrestDate = ArrestDate
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Arrest (OfficerID, CaseID, ArrestDate)
-                VALUES (?, ?, ?)
-            ''', (self.OfficerID, self.CaseID, self.ArrestDate))
-
-            conn.commit()
+            values = (self.OfficerID, self.CaseID, self.ArrestDate)
+            insert_into_table("Arrest", [values])
             print("Arrest inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Arrest:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Interrogates:
     def __init__(self, OfficerID, SuspectID):
@@ -428,30 +273,14 @@ class Interrogates:
         self.SuspectID = SuspectID
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Interrogates (OfficerID, SuspectID)
-                VALUES (?, ?)
-            ''', (self.OfficerID, self.SuspectID))
-
-            conn.commit()
+            values = (self.OfficerID, self.SuspectID)
+            insert_into_table("Interrogates", [values])
             print("Interrogates inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Interrogates:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Affects:
     def __init__(self, CaseID, VictimID):
@@ -459,30 +288,14 @@ class Affects:
         self.VictimID = VictimID
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Affects (CaseID, VictimID)
-                VALUES (?, ?)
-            ''', (self.CaseID, self.VictimID))
-
-            conn.commit()
+            values = (self.CaseID, self.VictimID)
+            insert_into_table("Affects", [values])
             print("Affects inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Affects:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Witnessed:
     def __init__(self, CaseID, WitnessID):
@@ -490,30 +303,14 @@ class Witnessed:
         self.WitnessID = WitnessID
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Witnessed (CaseID, WitnessID)
-                VALUES (?, ?)
-            ''', (self.CaseID, self.WitnessID))
-
-            conn.commit()
+            values = (self.CaseID, self.WitnessID)
+            insert_into_table("Witnessed", [values])
             print("Witnessed inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Witnessed:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
 
 class Investigates:
     def __init__(self, OfficerID, CaseID, LeadInvestigatorID):
@@ -522,29 +319,14 @@ class Investigates:
         self.LeadInvestigatorID = LeadInvestigatorID
 
     def insert_into_database(self):
-        cursor = None 
         try:
-            conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=.;'
-                                   'Database=Criminal Investigation System;'
-                                   'Trusted_Connection=yes;')
-            cursor = conn.cursor()
-
-            cursor.execute('''
-                INSERT INTO Investigates (OfficerID, CaseID, LeadInvestigatorID)
-                VALUES (?, ?, ?)
-            ''', (self.OfficerID, self.CaseID, self.LeadInvestigatorID))
-
-            conn.commit()
+            values = (self.OfficerID, self.CaseID, self.LeadInvestigatorID)
+            insert_into_table("Investigates", [values])
             print("Investigates inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Investigates:", e)
 
-        finally:
-            if cursor:
-                cursor.close()  # Close cursor
-            if conn:
-                conn.close()  # Close connection
+
 
 
