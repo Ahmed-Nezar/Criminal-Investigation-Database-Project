@@ -6,7 +6,7 @@ def insert_into_table(table_name, values):
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=quiz;'
+                               'Database=Criminal Investigation System;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
@@ -32,7 +32,7 @@ def delete_from_table(table_name, primary_keys, values):
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=quiz;'
+                               'Database=Criminal Investigation System;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
         if isinstance(primary_keys, str):
@@ -61,7 +61,7 @@ def writequery(code):
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=quiz;'
+                               'Database=Criminal Investigation System;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
@@ -88,7 +88,7 @@ def get_all_ids(table_name, primary_keys):
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=quiz;'
+                               'Database=Criminal Investigation System;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
