@@ -43,30 +43,12 @@ image_1 = canvas.create_image(
     image=image_image_1
 )
 
-canvas.create_text(
-    171.0,
-    81.0,
-    anchor="nw",
-    text="Criminal Investigation System",
-    fill="#FFFFFF",
-    font=("RobotoRoman Bold", 32 * -1)
-)
-
 image_image_2 = PhotoImage(
     file=relative_to_assets("image_2.png"))
 image_2 = canvas.create_image(
     387.0,
     100.0,
     image=image_image_2
-)
-
-canvas.create_text(
-    298.0,
-    184.0,
-    anchor="nw",
-    text="Choose Mode",
-    fill="#FFFFFF",
-    font=("RobotoRoman Bold", 28 * -1)
 )
 
 image_image_3 = PhotoImage(
@@ -80,13 +62,13 @@ image_3 = canvas.create_image(
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
 button_1 = Button(
-    bg="#000000",
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_1 clicked"),
     relief="flat",
-    activebackground="#000000"
+    activebackground="#000000",
+    bg="#000000"
 )
 button_1.place(
     x=247.0,
@@ -101,7 +83,7 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Developer Button Clicked!"),
+    command=lambda: print("button_2 clicked"),
     relief="flat",
     activebackground="#000000",
     bg="#000000"
@@ -119,7 +101,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("User Button Clicked!"),
+    command=lambda: print("button_3 clicked"),
     relief="flat",
     activebackground="#000000",
     bg="#000000"
