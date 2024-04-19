@@ -1,0 +1,3 @@
+[submodule "GUI/Tkinter-Designer"]
+	path = GUI/Tkinter-Designer
+	url = https://github.com/ParthJadhav/Tkinter-Designer.git
