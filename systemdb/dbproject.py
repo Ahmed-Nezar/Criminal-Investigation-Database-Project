@@ -6,11 +6,10 @@ def insert_into_table(table_name, values):
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=Criminal Investigation System;'
+                               'Database=quiz;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
-        # Construct the SQL query dynamically
         placeholders = ','.join(['?' for _ in range(len(values[0]))])
         query = f'INSERT INTO {table_name} VALUES ({placeholders})'
         
@@ -27,13 +26,42 @@ def insert_into_table(table_name, values):
         if conn:
             conn.close()
 
+def delete_from_table(table_name, primary_keys, values):
+    cursor = None
+    conn = None
+    try:
+        conn = pyodbc.connect('Driver={SQL Server};'
+                               'Server=.;'
+                               'Database=quiz;'
+                               'Trusted_Connection=yes;')
+        cursor = conn.cursor()
+        if isinstance(primary_keys, str):
+            primary_keys = [primary_keys]  
+        
+        placeholders = ' AND '.join([f"{key} = ?" for key in primary_keys])
+        query = f'DELETE FROM {table_name} WHERE {placeholders}'
+
+        cursor.execute(query, values)  
+        conn.commit()
+        print("Record(s) deleted successfully from", table_name + ".")
+
+    except pyodbc.Error as e:
+        print("Error deleting record(s) from", table_name + ":", e)
+
+    finally:
+        if cursor:
+            cursor.close()  
+        if conn:
+            conn.close()
+
+
 def writequery(code):
     cursor = None
     conn = None
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=Criminal Investigation System;'
+                               'Database=quiz;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
@@ -45,7 +73,7 @@ def writequery(code):
         print("The code is run successfully.")
 
     except pyodbc.Error as e:
-        print("Error inserting values into:", e)
+        print("Error excuting values into:", e)
 
     finally:
         if cursor:
@@ -113,7 +141,14 @@ class Suspect:
         return get_all_ids("Suspect","*")
     def get_columns(columns_name):
         return get_all_ids("Suspect",columns_name)
-    
+    def delete(primarykey,values):
+        try:
+            delete_from_table("Suspect",primarykey,values)
+            print("Suspect deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Suspect:", e)
+
 class Criminal:
     def __init__(self, CriminalID, FirstName, LastName, Status, Description):
         self.CriminalID = CriminalID
@@ -130,11 +165,17 @@ class Criminal:
 
         except pyodbc.Error as e:
             print("Error inserting Criminal:", e)
-        def get_all():
-            return get_all_ids("Criminal","*")
-        def get_columns(columns_name):
-            return get_all_ids("Criminal",columns_name)
+    def get_all():
+        return get_all_ids("Criminal","*")
+    def get_columns(columns_name):
+        return get_all_ids("Criminal",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Criminal", primary_key, values)
+            print("Criminal deleted successfully.")
 
+        except pyodbc.Error as e:
+            print("Error deleting Criminal:", e)
 class CriminalRecord:
     
     def __init__(self, SuspectID, CriminalID, CrimeRecord):
@@ -153,6 +194,13 @@ class CriminalRecord:
         return get_all_ids("CriminalRecord","*")
     def get_columns(columns_name):
         return get_all_ids("CriminalRecord",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("CriminalRecord", primary_key, values)
+            print("CriminalRecord deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting CriminalRecord:", e)
 
 class Case:
     def __init__(self, CaseID, StartDate, EndDate, Description, Status, OfficerID):
@@ -175,8 +223,13 @@ class Case:
         return get_all_ids("Case","*")
     def get_columns(columns_name):
         return get_all_ids("Case",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Case", primary_key, values)
+            print("Case deleted successfully.")
 
-
+        except pyodbc.Error as e:
+            print("Error deleting Case:", e)
 
 class CrimeScene:
     def __init__(self, CaseID, Time, Location):
@@ -196,6 +249,14 @@ class CrimeScene:
         return get_all_ids("CrimeScene","*")
     def get_columns(columns_name):
         return get_all_ids("CrimeScene",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("CrimeScene", primary_key, values)
+            print("CrimeScene deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting CrimeScene:", e)
+
 class Evidence:
     def __init__(self, CaseID, Type, Description):
         self.CaseID = CaseID
@@ -214,6 +275,13 @@ class Evidence:
         return get_all_ids("Evidence","*")
     def get_columns(columns_name):
         return get_all_ids("Evidence",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Evidence", primary_key, values)
+            print("Evidence deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Evidence:", e)
 
 class Witness:
     def __init__(self, WitnessID, FirstName, LastName, DateOfBirth, Gender, Age, Address, PhoneNumber, Email):
@@ -239,6 +307,13 @@ class Witness:
         return get_all_ids("Witness1","*")
     def get_columns(columns_name):
         return get_all_ids("Witness1",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Witness1", primary_key, values)
+            print("Witness deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Witness:", e)
 
 class Victim:
     def __init__(self, VictimID, FirstName, LastName, DateOfBirth, Age, Gender, Address, PhoneNumber, Injuries):
@@ -264,6 +339,13 @@ class Victim:
         return get_all_ids("Victim","*")
     def get_columns(columns_name):
         return get_all_ids("Victim",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Victim", primary_key, values)
+            print("Victim deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Victim:", e)
 
 class Officer:
     def __init__(self, OfficerID, FirstName, LastName, DateOfBirth, Gender, BadgeNumber, Rank, SupervisorID, Email, PhoneNumber):
@@ -290,7 +372,14 @@ class Officer:
         return get_all_ids("Officer","*")
     def get_columns(columns_name):
         return get_all_ids("Officer",columns_name)
-    
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Officer", primary_key, values)
+            print("Officer deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Officer:", e)
+
 class PoliceStation:
     def __init__(self, StationID, Name, Location, Telephone, StationChief):
         self.StationID = StationID
@@ -311,6 +400,13 @@ class PoliceStation:
         return get_all_ids("PoliceStation","*")
     def get_columns(columns_name):
         return get_all_ids("PoliceStation",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("PoliceStation", primary_key, values)
+            print("PoliceStation deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting PoliceStation:", e)
 
 class Arrest:
     def __init__(self, OfficerID, CaseID, ArrestDate):
@@ -330,6 +426,13 @@ class Arrest:
         return get_all_ids("Arrest","*")
     def get_columns(columns_name):
         return get_all_ids("Arrest",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Arrest", primary_key, values)
+            print("Arrest deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Arrest:", e)
 
 class Interrogates:
     def __init__(self, OfficerID, SuspectID):
@@ -348,6 +451,13 @@ class Interrogates:
         return get_all_ids("Interrogates","*")
     def get_columns(columns_name):
         return get_all_ids("Interrogates",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Interrogates", primary_key, values)
+            print("Interrogates deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Interrogates:", e)
 
 class Affects:
     def __init__(self, CaseID, VictimID):
@@ -366,6 +476,13 @@ class Affects:
         return get_all_ids("Affects","*")
     def get_columns(columns_name):
         return get_all_ids("Affects",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Affects", primary_key, values)
+            print("Affects deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Affects:", e)
 
 class Witnessed:
     def __init__(self, CaseID, WitnessID):
@@ -385,6 +502,13 @@ class Witnessed:
         return get_all_ids("Witnessed","*")
     def get_columns(columns_name):
         return get_all_ids("Witnessed",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Witnessed", primary_key, values)
+            print("Witnessed deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Witnessed:", e)
 
 class Investigates:
     def __init__(self, OfficerID, CaseID, LeadInvestigatorID):
@@ -404,5 +528,12 @@ class Investigates:
         return get_all_ids("Investigates","*")
     def get_columns(columns_name):
         return get_all_ids("Investigates",columns_name)
+    def delete(primary_key, values):
+        try:
+            delete_from_table("Investigates", primary_key, values)
+            print("Investigates deleted successfully.")
+
+        except pyodbc.Error as e:
+            print("Error deleting Investigates:", e)
 
 
