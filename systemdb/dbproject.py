@@ -1,5 +1,5 @@
 import pyodbc
-
+#Criminal Investigation System
 def insert_into_table(table_name, values):
     cursor = None
     conn = None
@@ -27,8 +27,7 @@ def insert_into_table(table_name, values):
         if conn:
             conn.close()
 
-def get_all_ids(table_name, primary_keys):
-    ids = []
+def writequery(code):
     cursor = None
     conn = None
     try:
@@ -38,14 +37,44 @@ def get_all_ids(table_name, primary_keys):
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
+        # Construct the SQL query dynamically
+        query = code
+        
+        cursor.execute(query)
+        conn.commit()
+        print("The code is run successfully.")
+
+    except pyodbc.Error as e:
+        print("Error inserting values into:", e)
+
+    finally:
+        if cursor:
+            cursor.close()  
+        if conn:
+            conn.close()
+
+def get_all_ids(table_name, primary_keys):
+    ids = []
+    cursor = None
+    conn = None
+    try:
+        conn = pyodbc.connect('Driver={SQL Server};'
+                               'Server=.;'
+                               'Database=quiz;'
+                               'Trusted_Connection=yes;')
+        cursor = conn.cursor()
+
         column_names = ", ".join(primary_keys)
         cursor.execute(f'SELECT {column_names} FROM {table_name}')
         rows = cursor.fetchall()
-        for row in rows:
-            if len(primary_keys) == 1:
-                ids.append(row[0])
-            else:
-                ids.append(row)
+        if primary_keys=='*':
+            ids=rows
+        else:
+            for row in rows:
+                if len(primary_keys) == 1:
+                    ids.append(row[0])
+                else:
+                    ids.append(row)
 
     except pyodbc.Error as e:
         print("Error fetching IDs:", e)
@@ -80,7 +109,10 @@ class Suspect:
 
         except pyodbc.Error as e:
             print("Error inserting Suspect:", e)
-    
+    def get_all():
+        return get_all_ids("Suspect","*")
+    def get_columns(columns_name):
+        return get_all_ids("Suspect",columns_name)
     
 class Criminal:
     def __init__(self, CriminalID, FirstName, LastName, Status, Description):
@@ -98,6 +130,10 @@ class Criminal:
 
         except pyodbc.Error as e:
             print("Error inserting Criminal:", e)
+        def get_all():
+            return get_all_ids("Criminal","*")
+        def get_columns(columns_name):
+            return get_all_ids("Criminal",columns_name)
 
 class CriminalRecord:
     
@@ -113,7 +149,10 @@ class CriminalRecord:
 
         except pyodbc.Error as e:
             print("Error inserting CriminalRecord:", e)
-    
+    def get_all():
+        return get_all_ids("CriminalRecord","*")
+    def get_columns(columns_name):
+        return get_all_ids("CriminalRecord",columns_name)
 
 class Case:
     def __init__(self, CaseID, StartDate, EndDate, Description, Status, OfficerID):
@@ -132,7 +171,10 @@ class Case:
 
         except pyodbc.Error as e:
             print("Error inserting Case:", e)
-
+    def get_all():
+        return get_all_ids("Case","*")
+    def get_columns(columns_name):
+        return get_all_ids("Case",columns_name)
 
 
 
@@ -150,7 +192,10 @@ class CrimeScene:
 
         except pyodbc.Error as e:
             print("Error inserting CrimeScene:", e)
-
+    def get_all():
+        return get_all_ids("CrimeScene","*")
+    def get_columns(columns_name):
+        return get_all_ids("CrimeScene",columns_name)
 class Evidence:
     def __init__(self, CaseID, Type, Description):
         self.CaseID = CaseID
@@ -165,7 +210,10 @@ class Evidence:
 
         except pyodbc.Error as e:
             print("Error inserting Evidence:", e)
-
+    def get_all():
+        return get_all_ids("Evidence","*")
+    def get_columns(columns_name):
+        return get_all_ids("Evidence",columns_name)
 
 class Witness:
     def __init__(self, WitnessID, FirstName, LastName, DateOfBirth, Gender, Age, Address, PhoneNumber, Email):
@@ -187,7 +235,10 @@ class Witness:
 
         except pyodbc.Error as e:
             print("Error inserting Witness:", e)
-
+    def get_all():
+        return get_all_ids("Witness1","*")
+    def get_columns(columns_name):
+        return get_all_ids("Witness1",columns_name)
 
 class Victim:
     def __init__(self, VictimID, FirstName, LastName, DateOfBirth, Age, Gender, Address, PhoneNumber, Injuries):
@@ -209,7 +260,10 @@ class Victim:
 
         except pyodbc.Error as e:
             print("Error inserting Victim:", e)
-
+    def get_all():
+        return get_all_ids("Victim","*")
+    def get_columns(columns_name):
+        return get_all_ids("Victim",columns_name)
 
 class Officer:
     def __init__(self, OfficerID, FirstName, LastName, DateOfBirth, Gender, BadgeNumber, Rank, SupervisorID, Email, PhoneNumber):
@@ -232,7 +286,11 @@ class Officer:
 
         except pyodbc.Error as e:
             print("Error inserting Officer:", e)
-
+    def get_all():
+        return get_all_ids("Officer","*")
+    def get_columns(columns_name):
+        return get_all_ids("Officer",columns_name)
+    
 class PoliceStation:
     def __init__(self, StationID, Name, Location, Telephone, StationChief):
         self.StationID = StationID
@@ -249,7 +307,10 @@ class PoliceStation:
 
         except pyodbc.Error as e:
             print("Error inserting PoliceStation:", e)
-
+    def get_all():
+        return get_all_ids("PoliceStation","*")
+    def get_columns(columns_name):
+        return get_all_ids("PoliceStation",columns_name)
 
 class Arrest:
     def __init__(self, OfficerID, CaseID, ArrestDate):
@@ -265,7 +326,10 @@ class Arrest:
 
         except pyodbc.Error as e:
             print("Error inserting Arrest:", e)
-
+    def get_all():
+        return get_all_ids("Arrest","*")
+    def get_columns(columns_name):
+        return get_all_ids("Arrest",columns_name)
 
 class Interrogates:
     def __init__(self, OfficerID, SuspectID):
@@ -280,7 +344,10 @@ class Interrogates:
 
         except pyodbc.Error as e:
             print("Error inserting Interrogates:", e)
-
+    def get_all():
+        return get_all_ids("Interrogates","*")
+    def get_columns(columns_name):
+        return get_all_ids("Interrogates",columns_name)
 
 class Affects:
     def __init__(self, CaseID, VictimID):
@@ -295,7 +362,10 @@ class Affects:
 
         except pyodbc.Error as e:
             print("Error inserting Affects:", e)
-
+    def get_all():
+        return get_all_ids("Affects","*")
+    def get_columns(columns_name):
+        return get_all_ids("Affects",columns_name)
 
 class Witnessed:
     def __init__(self, CaseID, WitnessID):
@@ -311,6 +381,10 @@ class Witnessed:
         except pyodbc.Error as e:
             print("Error inserting Witnessed:", e)
 
+    def get_all():
+        return get_all_ids("Witnessed","*")
+    def get_columns(columns_name):
+        return get_all_ids("Witnessed",columns_name)
 
 class Investigates:
     def __init__(self, OfficerID, CaseID, LeadInvestigatorID):
@@ -326,7 +400,9 @@ class Investigates:
 
         except pyodbc.Error as e:
             print("Error inserting Investigates:", e)
-
-
+    def get_all():
+        return get_all_ids("Investigates","*")
+    def get_columns(columns_name):
+        return get_all_ids("Investigates",columns_name)
 
 
