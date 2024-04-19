@@ -31,7 +31,7 @@ For reference check this [link.](https://www.youtube.com/watch?v=XLzV_gagkZc)
 2. Open the terminal
 3. Run the following command:
 ```bash
- cd GUI/Tiknter-Designer
+ cd GUI/Tkinter-Designer
  pip install -r requirements.txt
 ```
 4. Create Figma account to create the GUI design
