@@ -80,11 +80,13 @@ image_3 = canvas.create_image(
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
 button_1 = Button(
+    bg="#000000",
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_1 clicked"),
-    relief="flat"
+    relief="flat",
+    activebackground="#000000"
 )
 button_1.place(
     x=247.0,
@@ -100,7 +102,9 @@ button_2 = Button(
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("Developer Button Clicked!"),
-    relief="flat"
+    relief="flat",
+    activebackground="#000000",
+    bg="#000000"
 )
 button_2.place(
     x=247.0,
@@ -116,7 +120,9 @@ button_3 = Button(
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("User Button Clicked!"),
-    relief="flat"
+    relief="flat",
+    activebackground="#000000",
+    bg="#000000"
 )
 button_3.place(
     x=247.0,
