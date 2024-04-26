@@ -1,12 +1,26 @@
 import pyodbc
 #Criminal Investigation System
+
+
+# CREATE PROCEDURE GetAllRecordsWithKeys
+#     @TableName NVARCHAR(50),
+#     @Keys NVARCHAR(MAX)
+# AS
+# BEGIN
+#     DECLARE @SQLQuery NVARCHAR(MAX)
+#     SET @SQLQuery = 'SELECT ' + @Keys + ' FROM ' + @TableName
+#     EXEC sp_executesql @SQLQuery
+# END
+
+#please note the database is wrong 
+
 def insert_into_table(table_name, values):
     cursor = None
     conn = None
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=Criminal Investigation System;'
+                               'Database=quiz;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
@@ -32,7 +46,7 @@ def delete_from_table(table_name, primary_keys, values):
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=Criminal Investigation System;'
+                               'Database=quiz;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
         if isinstance(primary_keys, str):
@@ -61,7 +75,7 @@ def writequery(code):
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=Criminal Investigation System;'
+                               'Database=quiz;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
@@ -82,34 +96,39 @@ def writequery(code):
             conn.close()
 
 def get_all_ids(table_name, primary_keys):
-    ids = []
     cursor = None
     conn = None
+    ids=[]
     try:
         conn = pyodbc.connect('Driver={SQL Server};'
                                'Server=.;'
-                               'Database=Criminal Investigation System;'
+                               'Database=quiz;'
                                'Trusted_Connection=yes;')
         cursor = conn.cursor()
 
-        column_names = ", ".join(primary_keys)
-        cursor.execute(f'SELECT {column_names} FROM {table_name}')
+        
+        if isinstance(primary_keys, list):
+            primary_keys = ', '.join(primary_keys)
+
+        query = 'EXEC GetAllRecordsWithKeys @TableName = ?, @Keys = ?'
+
+        cursor.execute(query, (table_name, primary_keys))
         rows = cursor.fetchall()
-        if primary_keys=='*':
-            ids=rows
+        if primary_keys == '*':
+            ids = rows
         else:
             for row in rows:
-                if len(primary_keys) == 1:
+                if len(primary_keys.split(',')) == 1:
                     ids.append(row[0])
                 else:
                     ids.append(row)
 
     except pyodbc.Error as e:
-        print("Error fetching IDs:", e)
+        print("Error executing query:", e)
 
     finally:
         if cursor:
-            cursor.close()
+            cursor.close()  
         if conn:
             conn.close()
 
@@ -537,3 +556,4 @@ class Investigates:
             print("Error deleting Investigates:", e)
 
 
+print(Suspect.get_columns('SuspectID'))
