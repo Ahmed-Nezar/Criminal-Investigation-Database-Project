@@ -128,7 +128,7 @@ def get_all_ids(table_name, primary_keys):
         if isinstance(primary_keys, list):
             primary_keys = ', '.join(primary_keys)
 
-        query = 'EXEC GetAllRecordsWithKeys @TableName = ?, @Keys = ?'
+        query = 'EXEC GetAllRecords @TableName = ?, @Keys = ?'
 
         cursor.execute(query, (table_name, primary_keys))
         rows = cursor.fetchall()

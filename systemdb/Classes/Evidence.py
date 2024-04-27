@@ -1,5 +1,5 @@
 import pyodbc
-from systemdb.globalFunc import *
+from .globalFunc import *
 
 class Evidence:
     def __init__(self, CaseID, Type, Description):

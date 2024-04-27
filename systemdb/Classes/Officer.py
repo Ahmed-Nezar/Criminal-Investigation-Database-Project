@@ -1,5 +1,5 @@
 import pyodbc
-from systemdb.globalFunc import *
+from .globalFunc import *
 
 class Officer:
     def __init__(self, OfficerID, FirstName, LastName, DateOfBirth, Gender, BadgeNumber, Rank, SupervisorID, Email, PhoneNumber):

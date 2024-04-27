@@ -1,5 +1,5 @@
 import pyodbc
-from systemdb.globalFunc import *
+from .globalFunc import *
 
 class Witnessed:
     def __init__(self, CaseID, WitnessID):

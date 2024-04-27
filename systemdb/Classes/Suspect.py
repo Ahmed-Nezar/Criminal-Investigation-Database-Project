@@ -1,5 +1,5 @@
 import pyodbc
-from systemdb.globalFunc import *
+from .globalFunc import *
 
 class Suspect:
     def __init__(self, SuspectID, FirstName, LastName, Gender, DateOfBirth, PhoneRecord, AddressStreet, AddressGovernment, AddressZIP):

@@ -1,5 +1,5 @@
 import pyodbc
-from systemdb.globalFunc import *
+from .globalFunc import *
 
 class Witness:
     def __init__(self, WitnessID, FirstName, LastName, DateOfBirth, Gender, Address, PhoneNumber, Email):
@@ -16,18 +16,18 @@ class Witness:
     def insert_into_database(self):
         try:
             values = (self.WitnessID, self.FirstName, self.LastName, self.DateOfBirth, self.Gender, self.Age, self.Address, self.PhoneNumber, self.Email)
-            insert_into_table("Witness1", [values])
+            insert_into_table("Witness", [values])
             print("Witness inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Witness:", e)
     def get_all():
-        return get_all_ids("Witness1","*")
+        return get_all_ids("Witness","*")
     def get_columns(columns_name):
-        return get_all_ids("Witness1",columns_name)
+        return get_all_ids("Witness",columns_name)
     def delete(primary_key, values):
         try:
-            delete_from_table("Witness1", primary_key, values)
+            delete_from_table("Witness", primary_key, values)
             print("Witness deleted successfully.")
 
         except pyodbc.Error as e:

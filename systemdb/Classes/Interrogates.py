@@ -1,5 +1,5 @@
 import pyodbc
-from systemdb.globalFunc import *
+from .globalFunc import *
 
 class Interrogates:
     def __init__(self, OfficerID, SuspectID):

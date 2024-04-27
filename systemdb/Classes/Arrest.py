@@ -1,5 +1,5 @@
 import pyodbc
-from systemdb.globalFunc import *
+from .globalFunc import *
 
 class Arrest:
     def __init__(self, OfficerID, CaseID, ArrestDate):

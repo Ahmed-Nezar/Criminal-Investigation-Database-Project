@@ -1,5 +1,5 @@
 import pyodbc
-from systemdb.globalFunc import *
+from .globalFunc import *
 
 class Case:
     def __init__(self, CaseID, StartDate, EndDate, Description, Status, OfficerID):
