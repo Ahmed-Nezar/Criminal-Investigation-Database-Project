@@ -12,7 +12,44 @@ import pyodbc
 #     EXEC sp_executesql @SQLQuery
 # END
 
-#please note the database is wrong 
+# CREATE FUNCTION CalculateAge (@dob DATE)
+# RETURNS INT
+# AS
+# BEGIN
+#     DECLARE @age INT;
+#     SET @age = DATEDIFF(YEAR, @dob, GETDATE());
+#     RETURN @age;
+# END;
+
+
+def get_age_from_birthdate(birth_date):
+    age = None
+    conn = None
+    cursor = None
+    try:
+        conn = pyodbc.connect('Driver={SQL Server};'
+                              'Server=.;'
+                              'Database=Criminal Investigation System;'
+                              'Trusted_Connection=yes;')
+        cursor = conn.cursor()
+
+        # Call the SQL function CalculateAge
+        query = "SELECT dbo.CalculateAge(?) AS Age"
+        cursor.execute(query, (birth_date,))
+        row = cursor.fetchone()
+        if row:
+            age = row.Age
+
+    except pyodbc.Error as e:
+        print("Error:", e)
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+    return age
 
 def insert_into_table(table_name, values):
     cursor = None
@@ -30,7 +67,10 @@ def insert_into_table(table_name, values):
         cursor.executemany(query, values)
         conn.commit()
         print("Values inserted into", table_name, "successfully.")
-
+        writequery(f'''UPDATE {table_name}
+        SET column1 = value1, column2 = value2, ...
+        WHERE condition;
+        ''')
     except pyodbc.Error as e:
         print("Error inserting values into", table_name + ":", e)
 
@@ -303,13 +343,13 @@ class Evidence:
             print("Error deleting Evidence:", e)
 
 class Witness:
-    def __init__(self, WitnessID, FirstName, LastName, DateOfBirth, Gender, Age, Address, PhoneNumber, Email):
+    def __init__(self, WitnessID, FirstName, LastName, DateOfBirth, Gender, Address, PhoneNumber, Email):
         self.WitnessID = WitnessID
         self.FirstName = FirstName
         self.LastName = LastName
         self.DateOfBirth = DateOfBirth
         self.Gender = Gender
-        self.Age = Age
+        self.Age = get_age_from_birthdate(DateOfBirth)
         self.Address = Address
         self.PhoneNumber = PhoneNumber
         self.Email = Email
@@ -335,12 +375,12 @@ class Witness:
             print("Error deleting Witness:", e)
 
 class Victim:
-    def __init__(self, VictimID, FirstName, LastName, DateOfBirth, Age, Gender, Address, PhoneNumber, Injuries):
+    def __init__(self, VictimID, FirstName, LastName, DateOfBirth, Gender, Address, PhoneNumber, Injuries):
         self.VictimID = VictimID
         self.FirstName = FirstName
         self.LastName = LastName
         self.DateOfBirth = DateOfBirth
-        self.Age = Age
+        self.Age = get_age_from_birthdate(DateOfBirth)
         self.Gender = Gender
         self.Address = Address
         self.PhoneNumber = PhoneNumber
@@ -556,4 +596,4 @@ class Investigates:
             print("Error deleting Investigates:", e)
 
 
-print(Suspect.get_all())
+print(Witness.get_all())
