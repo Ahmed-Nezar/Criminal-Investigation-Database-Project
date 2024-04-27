@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>GUI/Implementation/build/assets/frame0/button_1.png</file>
+    <file>GUI/Implementation/build/assets/frame0/button_2.png</file>
+    <file>GUI/Implementation/build/assets/frame0/button_3.png</file>
+    <file>GUI/Implementation/build/assets/frame0/image_1.png</file>
+    <file>GUI/Implementation/build/assets/frame0/image_2.png</file>
+    <file>GUI/Implementation/build/assets/frame0/image_3.png</file>
+    <file>GUI/Implementation/build/assets/frame0/image_1.png</file>
+  </qresource>
+</RCC>
