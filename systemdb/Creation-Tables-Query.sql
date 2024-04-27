@@ -1,4 +1,6 @@
 CREATE DATABASE [Criminal Investigation System];
+
+use [Criminal Investigation System];
 -- Suspect table
 CREATE TABLE Suspect (
     SuspectID INT PRIMARY KEY,
@@ -207,5 +209,3 @@ CREATE TABLE CrimeRecord (
     PRIMARY KEY (CriminalID, CrimeRecord),
     FOREIGN KEY (CriminalID) REFERENCES Criminal(CriminalID)
 );
-
-
