@@ -25,6 +25,8 @@ class Witness:
         return get_all_ids("Witness",columns_name)
     def delete(primary_key, values):
         try:
+            delete_from_table("Witnessed", primary_key, values)
+            delete_from_table("Witness_Contact", primary_key, values)
             delete_from_table("Witness", primary_key, values)
             print("Witness deleted successfully.")
 
