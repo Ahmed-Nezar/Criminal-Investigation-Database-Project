@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Officers.ui'
+# self implementation generated from reading ui file 'Officers.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -12,10 +12,6 @@ import os
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Classes.Officer import Officer 
-
-curr_dir = os.path.dirname('systemdb\Classes\Officer.py')
-parent_dir = os.path.dirname(curr_dir)
-sys.path.insert(0, parent_dir)
 
 
 class Officers(QtWidgets.QWidget):
@@ -65,6 +61,18 @@ class Officers(QtWidgets.QWidget):
         self.OfficerSearchBtn.setFont(font)
         self.OfficerSearchBtn.setObjectName("OfficerSearchBtn")
         self.horizontalLayout_2.addWidget(self.OfficerSearchBtn)
+        self.OfficerContactInfoBtn = QtWidgets.QPushButton(self)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.OfficerContactInfoBtn.setFont(font)
+        self.OfficerContactInfoBtn.setObjectName("OfficerContactInfoBtn")
+        self.horizontalLayout_2.addWidget(self.OfficerContactInfoBtn)
+        self.OfficerArrestsBtn = QtWidgets.QPushButton(self)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.OfficerArrestsBtn.setFont(font)
+        self.OfficerArrestsBtn.setObjectName("OfficerArrestsBtn")
+        self.horizontalLayout_2.addWidget(self.OfficerArrestsBtn)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.gridLayout.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
@@ -133,11 +141,13 @@ class Officers(QtWidgets.QWidget):
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Form", "Form"))
-        self.OfficerSearchBtn.setText(_translate("Form", "Search"))
-        self.label.setText(_translate("Form", "Officers"))
-        self.AddOfficerBtn.setText(_translate("Form", "Add"))
-        self.BackBtn.setText(_translate("Form", "Back"))
+        self.setWindowTitle(_translate("self", "self"))
+        self.OfficerSearchBtn.setText(_translate("self", "Search"))
+        self.OfficerContactInfoBtn.setText(_translate("self", "Contact Info"))
+        self.OfficerArrestsBtn.setText(_translate("self", "Arrests"))
+        self.label.setText(_translate("self", "Officers"))
+        self.AddOfficerBtn.setText(_translate("self", "Add"))
+        self.BackBtn.setText(_translate("self", "Back"))
         
     # Add function of populate table with officers
     def populate_table(self):
@@ -155,7 +165,7 @@ class Officers(QtWidgets.QWidget):
             self.officers = Officer.search(search_value)
             if not self.officers:
                 msg = QtWidgets.QMessageBox()
-                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setIcon(QtWidgets.QMessageBox.Inselfation)
                 msg.setText("No suspects found")
                 msg.setWindowTitle("Search")
                 msg.exec_()
@@ -170,8 +180,8 @@ class Officers(QtWidgets.QWidget):
 # if __name__ == "__main__":
 #     import sys
 #     app = QtWidgets.QApplication(sys.argv)
-#     Form = QtWidgets.QWidget()
-#     ui = Ui_Form()
-#     ui.setupUi(Form)
-#     Form.show()
+#     self = QtWidgets.QWidget()
+#     ui = Ui_self()
+#     ui.setupUi(self)
+#     self.show()
 #     sys.exit(app.exec_())

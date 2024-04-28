@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# self implementation generated from reading ui file 'Suspect'sCriminalRecord.ui'
+# self implementation generated from reading ui file 'OfficerContactInfo.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -10,19 +10,18 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from Classes.CriminalRecord import CriminalRecord
+from Classes.OfficerContactInfo import OfficerContactInfo
 
 
-class SuspectsCriminalRecord(QtWidgets.QWidget):
+class OfficerContactInformation(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi()
-        self.criminal_records = CriminalRecord.return_view()
+        self.contact_infos_records = OfficerContactInfo.return_view()
         self.populate_table()
 
     def setupUi(self):
-        self.setObjectName("SuspectCriminalRecord")
-        self.resize(1007, 678)
+        self.setObjectName("OfficerArrests")
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -59,77 +58,78 @@ class SuspectsCriminalRecord(QtWidgets.QWidget):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
-        self.SuspectCriminalRecordSearchField = QtWidgets.QLineEdit(self)
+        self.OfficerContactSearchField = QtWidgets.QLineEdit(self)
         font = QtGui.QFont()
         font.setPointSize(15)
-        self.SuspectCriminalRecordSearchField.setFont(font)
-        self.SuspectCriminalRecordSearchField.setObjectName("SuspectCriminalRecordSearchField")
-        self.horizontalLayout_3.addWidget(self.SuspectCriminalRecordSearchField)
-        self.SuspectCriminalRecordSearchBtn = QtWidgets.QPushButton(self)
+        self.OfficerContactSearchField.setFont(font)
+        self.OfficerContactSearchField.setObjectName("OfficerContactSearchField")
+        self.horizontalLayout_3.addWidget(self.OfficerContactSearchField)
+        self.OfficerContactSearchBtn = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.SuspectCriminalRecordSearchBtn.sizePolicy().hasHeightForWidth())
-        self.SuspectCriminalRecordSearchBtn.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.OfficerContactSearchBtn.sizePolicy().hasHeightForWidth())
+        self.OfficerContactSearchBtn.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(15)
-        self.SuspectCriminalRecordSearchBtn.setFont(font)
-        self.SuspectCriminalRecordSearchBtn.setObjectName("SuspectCriminalRecordSearchBtn")
-        self.horizontalLayout_3.addWidget(self.SuspectCriminalRecordSearchBtn)
+        self.OfficerContactSearchBtn.setFont(font)
+        self.OfficerContactSearchBtn.setObjectName("OfficerContactSearchBtn")
+        self.horizontalLayout_3.addWidget(self.OfficerContactSearchBtn)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
         self.gridLayout.addLayout(self.horizontalLayout_3, 1, 0, 1, 1)
-        self.SuspectScrollArea = QtWidgets.QScrollArea(self)
+        self.OfficerContactScrollArea = QtWidgets.QScrollArea(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.SuspectScrollArea.sizePolicy().hasHeightForWidth())
-        self.SuspectScrollArea.setSizePolicy(sizePolicy)
-        self.SuspectScrollArea.setWidgetResizable(True)
-        self.SuspectScrollArea.setObjectName("SuspectScrollArea")
+        sizePolicy.setHeightForWidth(self.OfficerContactScrollArea.sizePolicy().hasHeightForWidth())
+        self.OfficerContactScrollArea.setSizePolicy(sizePolicy)
+        self.OfficerContactScrollArea.setWidgetResizable(True)
+        self.OfficerContactScrollArea.setObjectName("OfficerContactScrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 893, 515))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.SuspectScrollArea.setWidget(self.scrollAreaWidgetContents)
-        self.gridLayout.addWidget(self.SuspectScrollArea, 2, 0, 1, 1)
+        self.OfficerContactScrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.gridLayout.addWidget(self.OfficerContactScrollArea, 2, 0, 1, 1)
         self.gridLayout_2.addLayout(self.gridLayout, 1, 1, 1, 1)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem3, 1, 0, 1, 1)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem4, 1, 2, 1, 1)
 
-        # Table to display suspects
-        self.SuspectTable = QtWidgets.QTableWidget(self)
-        self.SuspectTable.setObjectName("SuspectTable")
-        self.SuspectTable.setColumnCount(4) # Number of columns
-        self.SuspectTable.setHorizontalHeaderLabels(['SuspectID', 'Name', 'Criminal Record', 'CaseID'])
-        self.gridLayout.addWidget(self.SuspectTable, 2, 0, 1, 1)
+        # Table to display contact_infos
+        self.OfficerContactInfoTable = QtWidgets.QTableWidget(self)
+        self.OfficerContactInfoTable.setObjectName("OfficerContactInfoTable")
+        self.OfficerContactInfoTable.setColumnCount(4) # Number of columns
+        self.OfficerContactInfoTable.setHorizontalHeaderLabels(['Officer ID','Officer Name', 'Email', 'Phone'])
+        self.gridLayout.addWidget(self.OfficerContactInfoTable, 2, 0, 1, 1)
 
-        self.SuspectCriminalRecordSearchBtn.clicked.connect(self.search_table)
+        self.OfficerContactSearchBtn.clicked.connect(self.search_table)
 
         self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("self", "self"))
-        self.label.setText(_translate("self", "Suspect\'s Criminal Record"))
+        self.label.setText(_translate("self", "Officer Contact Info"))
         self.BackBtn.setText(_translate("self", "Back"))
-        self.SuspectCriminalRecordSearchBtn.setText(_translate("Form", "Search"))
+        self.OfficerContactSearchBtn.setText(_translate("self", "Search"))
 
     def populate_table(self):
-        self.criminal_records = CriminalRecord.return_view()
-        self.SuspectTable.setRowCount(len(self.criminal_records))
+        self.contact_infos_records = OfficerContactInfo.return_view()
+        self.OfficerContactInfoTable.setRowCount(len(self.contact_infos_records))
         
-        for i, suspect in enumerate(self.criminal_records):
-            for j, data in enumerate(suspect):
+        for i, contact_info in enumerate(self.contact_infos_records):
+            for j, data in enumerate(contact_info):
                 item = QtWidgets.QTableWidgetItem(str(data))
-                self.SuspectTable.setItem(i, j, item)
-        self.SuspectTable.resizeColumnsToContents()
+                self.OfficerContactInfoTable.setItem(i, j, item)
+        self.OfficerContactInfoTable.resizeColumnsToContents()
 
     def search_table(self):
-        self.criminal_records = CriminalRecord.return_view()
-        search_value = self.SuspectCriminalRecordSearchField.text()
-        self.SuspectCriminalRecordSearchField.clear()
+        self.contact_infos_records = OfficerContactInfo.return_view()
+        search_value = self.OfficerContactSearchField.text()
+        self.OfficerContactSearchField.clear()
         
         if search_value:
             try:
@@ -141,28 +141,27 @@ class SuspectsCriminalRecord(QtWidgets.QWidget):
                 msg.setWindowTitle("Search")
                 msg.exec_()
                 return
-            suspects = []
-            for suspect in self.criminal_records:
-                if search_value in suspect:
-                    suspects.append(suspect)
-            if suspects == []:
+            contact_infos = []
+            for contact_info in self.contact_infos_records:
+                if search_value in contact_info:
+                    contact_infos.append(contact_info)
+            if contact_infos == []:
                 msg = QtWidgets.QMessageBox()
                 msg.setIcon(QtWidgets.QMessageBox.Information)
                 msg.setText("No Criminal Records found")
                 msg.setWindowTitle("Search")
                 msg.exec_()
             else:
-                self.SuspectTable.setRowCount(len(suspects))
+                self.OfficerContactInfoTable.setRowCount(len(contact_infos))
         
-                for i, suspect in enumerate(suspects):
-                    for j, data in enumerate(suspect):
+                for i, contact_info in enumerate(contact_infos):
+                    for j, data in enumerate(contact_info):
                         item = QtWidgets.QTableWidgetItem(str(data))
-                        self.SuspectTable.setItem(i, j, item)
-                self.SuspectTable.resizeColumnsToContents()
+                        self.OfficerContactInfoTable.setItem(i, j, item)
+                self.OfficerContactInfoTable.resizeColumnsToContents()
         else:
             
             self.populate_table()
-               
 
 
 # if __name__ == "__main__":

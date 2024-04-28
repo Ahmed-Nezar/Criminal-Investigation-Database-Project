@@ -18,6 +18,8 @@ from AddWitness import AddWitness
 from DatabaseManagerSQL import DatabaseManagerSQL
 from SuspectsCriminalRecord import SuspectsCriminalRecord
 from CriminalCrimeRecord import CriminalCrimeRecord
+from OfficerArrests import OfficerArrests
+from OfficerContactInformation import OfficerContactInformation
 
 import pyodbc
 from PyQt5.QtWidgets import QMessageBox
@@ -48,6 +50,8 @@ class MainWindow(QMainWindow):
         self.db_manager = DatabaseManagerSQL()
         self.suspects_criminal_record = SuspectsCriminalRecord()
         self.criminal_crime_record = CriminalCrimeRecord()
+        self.officer_arrests = OfficerArrests()
+        self.officer_contact_information = OfficerContactInformation()
 
         self.stacked_widget.addWidget(self.start_menu)
         self.stacked_widget.addWidget(self.login)
@@ -68,6 +72,8 @@ class MainWindow(QMainWindow):
         self.stacked_widget.setCurrentWidget(self.start_menu)
         self.stacked_widget.addWidget(self.suspects_criminal_record)
         self.stacked_widget.addWidget(self.criminal_crime_record)
+        self.stacked_widget.addWidget(self.officer_arrests)
+        self.stacked_widget.addWidget(self.officer_contact_information)
 
         # Start Menu Buttons
         self.start_menu.OfficerMenuBtn.clicked.connect(self.show_login)
@@ -95,6 +101,10 @@ class MainWindow(QMainWindow):
 
         self.officers.AddOfficerBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.add_officer))
         self.add_officer.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.officers))
+        self.officers.OfficerContactInfoBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.officer_contact_information)) 
+        self.officer_contact_information.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.officers))
+        self.officers.OfficerArrestsBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.officer_arrests))
+        self.officer_arrests.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.officers))
 
         self.cases.AddCaseBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.add_case))
         self.add_case.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.cases))

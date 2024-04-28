@@ -34,87 +34,42 @@
    </item>
    <item row="1" column="1">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_4">
+     <item row="13" column="0">
+      <widget class="QLabel" name="label_10">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Last Name</string>
+        <string>Station ID</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="label_7">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Badge Number</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
+     <item row="14" column="2">
+      <widget class="QLineEdit" name="OfficerEmailField"/>
      </item>
-     <item row="4" column="2">
-      <widget class="QLineEdit" name="OfficerFnField">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-      </widget>
+     <item row="9" column="2">
+      <widget class="QLineEdit" name="OfficerGenderField"/>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>OfficerID</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <spacer name="horizontalSpacer_4">
+     <item row="2" column="2">
+      <spacer name="verticalSpacer_2">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
+        <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
-         <height>20</height>
+         <width>20</width>
+         <height>40</height>
         </size>
        </property>
       </spacer>
      </item>
-     <item row="11" column="2">
-      <widget class="QLineEdit" name="OfficerRankField">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="13" column="2">
-      <widget class="QLineEdit" name="OfficerStationField">
+     <item row="6" column="2">
+      <widget class="QLineEdit" name="OfficerLn">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
@@ -138,37 +93,16 @@
        </property>
       </spacer>
      </item>
-     <item row="11" column="0">
-      <widget class="QLabel" name="label_8">
+     <item row="11" column="2">
+      <widget class="QLineEdit" name="OfficerRankField">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
         </font>
        </property>
-       <property name="text">
-        <string>Rank</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
       </widget>
      </item>
-     <item row="13" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Station ID</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="15" column="2">
+     <item row="17" column="2">
       <widget class="QPushButton" name="AddOfficerDataBtn">
        <property name="font">
         <font>
@@ -207,6 +141,69 @@
        </property>
       </widget>
      </item>
+     <item row="13" column="2">
+      <widget class="QLineEdit" name="OfficerStationField">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>DOB</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Rank</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Badge Number</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="2">
+      <widget class="QDateEdit" name="OfficerDOBField">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
      <item row="10" column="2">
       <widget class="QLineEdit" name="OfficerBadgeField">
        <property name="font">
@@ -216,14 +213,18 @@
        </property>
       </widget>
      </item>
-     <item row="12" column="2">
-      <widget class="QLineEdit" name="OfficerSuperField">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
+     <item row="16" column="2">
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-      </widget>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item row="9" column="0">
       <widget class="QLabel" name="label_6">
@@ -240,8 +241,20 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="2">
-      <widget class="QLineEdit" name="OfficerIDField">
+     <item row="17" column="0">
+      <widget class="QPushButton" name="BackBtn">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Back</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="2">
+      <widget class="QLineEdit" name="OfficerSuperField">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
@@ -249,15 +262,18 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
-      <spacer name="verticalSpacer_2">
+     <item row="8" column="1">
+      <spacer name="horizontalSpacer_4">
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
-         <height>40</height>
+         <width>40</width>
+         <height>20</height>
         </size>
        </property>
       </spacer>
@@ -277,8 +293,8 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="2">
-      <widget class="QLineEdit" name="OfficerLn">
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="OfficerFnField">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
@@ -286,57 +302,67 @@
        </property>
       </widget>
      </item>
-     <item row="14" column="2">
-      <spacer name="verticalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="8" column="2">
-      <widget class="QDateEdit" name="OfficerDOBField">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="15" column="0">
-      <widget class="QPushButton" name="BackBtn">
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_2">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Back</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>DOB</string>
+        <string>OfficerID</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
-     <item row="9" column="2">
-      <widget class="QLineEdit" name="OfficerGenderField"/>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Last Name</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="OfficerIDField">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="2">
+      <widget class="QLineEdit" name="OfficerPhoneField"/>
+     </item>
+     <item row="14" column="0">
+      <widget class="QLabel" name="label_11">
+       <property name="text">
+        <string>Email</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="0">
+      <widget class="QLabel" name="label_12">
+       <property name="text">
+        <string>Phone</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
