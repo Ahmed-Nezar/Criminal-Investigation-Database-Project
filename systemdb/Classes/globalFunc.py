@@ -151,3 +151,29 @@ def get_all_ids(table_name, primary_keys):
             conn.close()
 
     return ids
+
+def search_by_primary_key(table_name, primary_key, value):
+    cursor = None
+    conn = None
+    try:
+        conn = pyodbc.connect('Driver={SQL Server};'
+                               'Server=.;'
+                               'Database=Criminal Investigation System;'
+                               'Trusted_Connection=yes;')
+        cursor = conn.cursor()
+        
+        query = f'SELECT * FROM {table_name} WHERE {primary_key} = ?'
+
+        cursor.execute(query, value)
+        rows = cursor.fetchall()
+        
+
+    except pyodbc.Error as e:
+        print("Error searching for record(s) in", table_name + ":", e)
+
+    finally:
+        if cursor:
+            cursor.close()  
+        if conn:
+            conn.close()
+    return rows

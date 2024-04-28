@@ -2,7 +2,7 @@ import pyodbc
 from .globalFunc import *
 
 class Suspect:
-    def __init__(self, SuspectID, FirstName, LastName, Gender, DateOfBirth, PhoneRecord, AddressStreet, AddressGovernment, AddressZIP):
+    def __init__(self, SuspectID, FirstName, LastName, Gender, DateOfBirth, PhoneRecord, AddressStreet, AddressGovernment, AddressZIP,Criminal_Record):
         self.SuspectID = SuspectID
         self.FirstName = FirstName
         self.LastName = LastName
@@ -12,11 +12,15 @@ class Suspect:
         self.AddressStreet = AddressStreet
         self.AddressGovernment = AddressGovernment
         self.AddressZIP = AddressZIP
+        self.Criminal_Record=Criminal_Record
 
     def insert_into_database(self):
         try:
             values = (self.SuspectID, self.FirstName, self.LastName, self.Gender, self.DateOfBirth, self.PhoneRecord, self.AddressStreet, self.AddressGovernment, self.AddressZIP)
             insert_into_table("Suspect", [values])
+            for x in self.Criminal_Record:
+                 values = (self.SuspectID, x)
+                 insert_into_table("CriminalRecord", values)
             print("Suspect inserted successfully.")
 
         except pyodbc.Error as e:
@@ -32,3 +36,6 @@ class Suspect:
 
         except pyodbc.Error as e:
             print("Error deleting Suspect:", e)
+
+    def search(value):
+        return search_by_primary_key('Suspect','SuspectID',value)

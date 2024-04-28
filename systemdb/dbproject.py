@@ -9,4 +9,4 @@ from Classes.Witness import Witness
 
 
 
-print(Witness.get_all())
+print(Suspect.search(811))
