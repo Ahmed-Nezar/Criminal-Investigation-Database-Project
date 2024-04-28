@@ -28,3 +28,6 @@ class Criminal:
 
         except pyodbc.Error as e:
             print("Error deleting Criminal:", e)
+    
+    def search(value):
+        return search_by_primary_key('Criminal','CriminalID',value)
