@@ -52,10 +52,6 @@ def insert_into_table(table_name, values):
         cursor.executemany(query, values)
         conn.commit()
         print("Values inserted into", table_name, "successfully.")
-        writequery(f'''UPDATE {table_name}
-        SET column1 = value1, column2 = value2, ...
-        WHERE condition;
-        ''')
     except pyodbc.Error as e:
         print("Error inserting values into", table_name + ":", e)
 
