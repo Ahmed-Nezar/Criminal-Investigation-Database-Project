@@ -10,6 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from Classes.Case import Case
+from Classes.Officer import Officer
+
 
 class AddCase(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -137,6 +140,8 @@ class AddCase(QtWidgets.QWidget):
         spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_2.addItem(spacerItem7, 4, 1, 1, 1)
 
+        self.AddCaseDataBtn.clicked.connect(self.add_case)
+
         self.retranslateUi()
 
     def retranslateUi(self):
@@ -151,6 +156,76 @@ class AddCase(QtWidgets.QWidget):
         self.BackBtn.setText(_translate("self", "Back"))
         self.label.setText(_translate("self", "Add Case"))
         self.AddCaseDataBtn.setText(_translate("self", "Add"))
+
+    def add_case(self):
+        case_id = self.CaseIDField.text()
+        start_date = self.CaseStartField.text()
+        end_date = self.CaseEndField.text()
+        description = self.CaseDescriptionField.toPlainText()
+        status = self.CaseStatusField.text()
+        officer_fk = self.CaseOfficerFkField.text()
+        
+        if case_id == "" or start_date == "" or end_date == "" or description == "" or status == "" or officer_fk == "":
+            msg = QtWidgets.QMessageBox()
+            msg.setText("Please fill all fields")
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setText("All Data must be filled")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return
+        tmp = Case.get_all()
+        tmp = [x[0] for x in tmp]
+
+        tmpOfficer = Officer.get_all()
+        tmpOfficer = [x[0] for x in tmpOfficer]
+
+        try:
+            case_id = int(case_id)
+        except:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setText("Case ID must be an integer")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return
+        try:
+            officer_fk = int(officer_fk)
+        except:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setText("Officer ID must be an integer")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return
+        if case_id in tmp:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setText("Case ID already exists")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return
+        if officer_fk not in tmpOfficer:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setText("Officer ID does not exist")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return
+        case = Case(case_id, start_date, end_date, description, status, officer_fk)
+        case.insert_into_database()
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+        msg.setText("Case added successfully")
+        msg.setWindowTitle("Success")
+        msg.exec_()
+        self.CaseIDField.clear()
+        self.CaseStartField.clear()
+        self.CaseEndField.clear()
+        self.CaseDescriptionField.clear()
+        self.CaseStatusField.clear()
+        self.CaseOfficerFkField.clear()
+
+
 
 
 # if __name__ == "__main__":
