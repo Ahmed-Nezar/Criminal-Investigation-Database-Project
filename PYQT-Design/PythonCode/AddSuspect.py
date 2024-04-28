@@ -149,6 +149,8 @@ class AddSuspect(QtWidgets.QWidget):
         self.AddSuspectDataBtn.setFont(font)
         self.AddSuspectDataBtn.setObjectName("AddSuspectDataBtn")
         self.gridLayout.addWidget(self.AddSuspectDataBtn, 15, 2, 1, 1)
+
+        self.AddSuspectDataBtn.clicked.connect(self.add_suspect)
         self.SuspectAddrGovField = QtWidgets.QLineEdit(self)
         font = QtGui.QFont()
         font.setPointSize(15)
@@ -230,7 +232,7 @@ class AddSuspect(QtWidgets.QWidget):
             return
         
         suspect = Suspect(suspect_id, first_name, last_name, gender, dob, phone_record, street, government, zip)
-        suspect.add_suspect()
+        suspect.insert_into_database()
         QtWidgets.QMessageBox.information(self, 'Success', 'Suspect added successfully')
         self.SuspectIDField.clear()
         self.SuspectFirstNameField.clear()
