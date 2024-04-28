@@ -9,29 +9,20 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMainWindow, QStackedWidget
 
+class StartMenu(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi()
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(871, 599)
-        MainWindow.setStyleSheet("background-color: rgb(204, 204, 204);")
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.gridLayout = QtWidgets.QGridLayout()
+    def setupUi(self):
+        self.setObjectName("StartMenu")
+        self.resize(579, 440)
+        self.gridLayout = QtWidgets.QGridLayout(self)
         self.gridLayout.setObjectName("gridLayout")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout.addWidget(self.pushButton_2, 4, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem, 2, 1, 1, 1)
-        self.label = QtWidgets.QLabel(self.centralwidget)
+
+        self.label = QtWidgets.QLabel(self)
         font = QtGui.QFont()
         font.setFamily("The Rift Shop")
         font.setPointSize(26)
@@ -40,43 +31,46 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setStyleSheet("color: rgb(0, 0, 0);")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.label.setObjectName("label")
+        self.label.setText("Crime Investigation System")
         self.gridLayout.addWidget(self.label, 1, 1, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+
+        self.OfficerMenuBtn = QtWidgets.QPushButton(self)
         font = QtGui.QFont()
         font.setPointSize(15)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout.addWidget(self.pushButton, 3, 1, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem1, 3, 0, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem2, 5, 1, 1, 1)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem3, 0, 1, 1, 1)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem4, 3, 2, 1, 1)
-        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
-        MainWindow.setCentralWidget(self.centralwidget)
+        self.OfficerMenuBtn.setFont(font)
+        self.OfficerMenuBtn.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.OfficerMenuBtn.setText("Officer")
+        self.gridLayout.addWidget(self.OfficerMenuBtn, 3, 1, 1, 1)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.DatabaseManagerBtn = QtWidgets.QPushButton(self)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.DatabaseManagerBtn.setFont(font)
+        self.DatabaseManagerBtn.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.DatabaseManagerBtn.setText("Database Manager")
+        self.gridLayout.addWidget(self.DatabaseManagerBtn, 4, 1, 1, 1)
 
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton_2.setText(_translate("MainWindow", "Database Manager"))
-        self.label.setText(_translate("MainWindow", "Crime Investigation System"))
-        self.pushButton.setText(_translate("MainWindow", "Officer"))
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem, 2, 1, 1, 1)
+
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem2, 3, 0, 1, 1)
+
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem3, 3, 2, 1, 1)
+
+        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem4, 5, 1, 1, 1)
+
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem5, 0, 1, 1, 1)
 
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Form = QtWidgets.QWidget()
+#     ui = Ui_Form()
+#     ui.setupUi(Form)
+#     Form.show()
+#     sys.exit(app.exec_())
