@@ -13,7 +13,6 @@ class Criminal:
         try:
             values = (self.CriminalID, self.FirstName, self.LastName, self.Status, self.Description)
             insert_into_table("Criminal", [values])
-            print("Criminal inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Criminal:", e)
