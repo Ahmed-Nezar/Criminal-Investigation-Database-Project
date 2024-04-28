@@ -54,19 +54,29 @@ class Suspects(QtWidgets.QWidget):
         font.setPointSize(15)
         self.SuspectSearchBtn.setFont(font)
         self.SuspectSearchBtn.setObjectName("SuspectSearchBtn")
-        self.SuspectSearchBtn.clicked.connect(self.search_suspects)
         self.horizontalLayout_2.addWidget(self.SuspectSearchBtn)
+        self.SuspectsCriminalRecordsBtn = QtWidgets.QPushButton(self)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.SuspectsCriminalRecordsBtn.setFont(font)
+        self.SuspectsCriminalRecordsBtn.setObjectName("SuspectsCriminalRecordsBtn")
+        self.horizontalLayout_2.addWidget(self.SuspectsCriminalRecordsBtn)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.gridLayout.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
-        
-        # Table to display suspects
-        self.SuspectTable = QtWidgets.QTableWidget(self)
-        self.SuspectTable.setObjectName("SuspectTable")
-        self.SuspectTable.setColumnCount(9) # Number of columns
-        self.SuspectTable.setHorizontalHeaderLabels(['SuspectID', 'First Name', 'Last Name', 'Gender', 'Date of Birth', 'Phone Record', ' Street', ' Government', ' ZIP'])
-        self.gridLayout.addWidget(self.SuspectTable, 2, 0, 1, 1)
-        
+        self.SuspectScrollArea = QtWidgets.QScrollArea(self)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.SuspectScrollArea.sizePolicy().hasHeightForWidth())
+        self.SuspectScrollArea.setSizePolicy(sizePolicy)
+        self.SuspectScrollArea.setWidgetResizable(True)
+        self.SuspectScrollArea.setObjectName("SuspectScrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 893, 515))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.SuspectScrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.gridLayout.addWidget(self.SuspectScrollArea, 2, 0, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label = QtWidgets.QLabel(self)
@@ -105,6 +115,13 @@ class Suspects(QtWidgets.QWidget):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem4, 1, 2, 1, 1)
 
+        # Table to display suspects
+        self.SuspectTable = QtWidgets.QTableWidget(self)
+        self.SuspectTable.setObjectName("SuspectTable")
+        self.SuspectTable.setColumnCount(10) # Number of columns
+        self.SuspectTable.setHorizontalHeaderLabels(['SuspectID', 'First Name', 'Last Name', 'Gender', 'Date of Birth', 'Phone Record', ' Street', ' Government', ' ZIP', 'Remove'])
+        self.gridLayout.addWidget(self.SuspectTable, 2, 0, 1, 1)
+
         self.retranslateUi()
 
     def retranslateUi(self):
@@ -114,6 +131,7 @@ class Suspects(QtWidgets.QWidget):
         self.label.setText(_translate("self", "Suspects"))
         self.AddSuspectBtn.setText(_translate("self", "Add"))
         self.BackBtn.setText(_translate("self", "Back"))
+        self.SuspectsCriminalRecordsBtn.setText(_translate("self", "Criminal Records"))
     
     def populate_table(self):
         self.SuspectTable.setRowCount(len(self.suspects))
@@ -121,6 +139,10 @@ class Suspects(QtWidgets.QWidget):
             for j, data in enumerate(suspect):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.SuspectTable.setItem(i, j, item)
+            remove_button = QtWidgets.QPushButton("Remove")
+            remove_button.clicked.connect(lambda _, suspect=suspect: self.remove_suspect(suspect))
+            self.SuspectTable.setCellWidget(i, len(suspect), remove_button)
+
 
     def search_suspects(self):
         search_value = self.SuspectSearchField.text()
@@ -129,7 +151,7 @@ class Suspects(QtWidgets.QWidget):
             self.suspects = Suspect.search(search_value)
             if not self.suspects:
                 msg = QtWidgets.QMessageBox()
-                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setIcon(QtWidgets.QMessageBox.Inselfation)
                 msg.setText("No suspects found")
                 msg.setWindowTitle("Search")
                 msg.exec_()
@@ -138,6 +160,11 @@ class Suspects(QtWidgets.QWidget):
         else:
             self.suspects = Suspect.get_all()
             self.populate_table()
+
+    def remove_suspect(self, suspect_row):
+        Suspect.delete(suspect_row[0])
+        self.suspects = Suspect.get_all()
+        self.populate_table()
 
 # if __name__ == "__main__":
 #     app = QtWidgets.QApplication(sys.argv)

@@ -25,9 +25,13 @@ class Suspect:
         return get_all_ids("Suspect","*")
     def get_columns(columns_name):
         return get_all_ids("Suspect",columns_name)
-    def delete(primarykey,values):
+    def delete(values):
+
         try:
-            delete_from_table("Suspect",primarykey,values)
+            delete_from_table("CriminalRecord","SuspectID",values)
+            delete_from_table("Involved","SuspectID",values)
+            delete_from_table("Interrogates","SuspectID",values)
+            delete_from_table("Suspect","SuspectID",values)
             print("Suspect deleted successfully.")
 
         except pyodbc.Error as e:
