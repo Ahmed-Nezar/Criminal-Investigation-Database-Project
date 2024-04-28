@@ -16,37 +16,45 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="1" rowspan="3" colspan="3">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="6" column="3">
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>60</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="9" column="2">
-      <widget class="QLineEdit" name="VictimGenderFIeld">
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_3">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
         </font>
+       </property>
+       <property name="text">
+        <string>DOB</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
-     <item row="8" column="2">
-      <widget class="QDateEdit" name="VictimDOBField">
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_4">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
         </font>
+       </property>
+       <property name="text">
+        <string>Address</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QPushButton" name="BackBtn">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Back</string>
        </property>
       </widget>
      </item>
@@ -59,33 +67,14 @@
        </property>
       </widget>
      </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="label_10">
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="VictimIDField">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
         </font>
        </property>
-       <property name="text">
-        <string>Age</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
       </widget>
-     </item>
-     <item row="2" column="2">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item row="9" column="0">
       <widget class="QLabel" name="label_9">
@@ -102,12 +91,15 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="2">
-      <widget class="QLineEdit" name="VictimIDField">
+     <item row="12" column="2">
+      <widget class="QPushButton" name="AddVictimDataBtn">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
         </font>
+       </property>
+       <property name="text">
+        <string>Add</string>
        </property>
       </widget>
      </item>
@@ -126,28 +118,6 @@
        </property>
       </widget>
      </item>
-     <item row="12" column="2">
-      <spacer name="verticalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="11" column="2">
-      <widget class="QLineEdit" name="VictimAddrField">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
      <item row="6" column="0">
       <widget class="QLabel" name="label_5">
        <property name="font">
@@ -163,8 +133,48 @@
        </property>
       </widget>
      </item>
+     <item row="6" column="2">
+      <widget class="QLineEdit" name="VictimFirstNameField">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Last Name</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="3">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>60</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
      <item row="10" column="2">
-      <widget class="QLineEdit" name="VictimAgeField">
+      <widget class="QLineEdit" name="VictimAddrField">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
@@ -172,33 +182,33 @@
        </property>
       </widget>
      </item>
-     <item row="11" column="0">
-      <widget class="QLabel" name="label_4">
+     <item row="1" column="2">
+      <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <pointsize>15</pointsize>
+         <pointsize>25</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Address</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <string>Add Victim</string>
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_3">
+     <item row="8" column="2">
+      <widget class="QDateEdit" name="VictimDOBField">
        <property name="font">
         <font>
          <pointsize>15</pointsize>
         </font>
        </property>
-       <property name="text">
-        <string>DOB</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
+      </widget>
+     </item>
+     <item row="9" column="2">
+      <widget class="QLineEdit" name="VictimGenderFIeld">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
        </property>
       </widget>
      </item>
@@ -218,65 +228,31 @@
        </property>
       </spacer>
      </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
+     <item row="11" column="2">
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-       <property name="text">
-        <string>Last Name</string>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
+      </spacer>
      </item>
-     <item row="13" column="0">
-      <widget class="QPushButton" name="BackBtn">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
+     <item row="2" column="2">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-       <property name="text">
-        <string>Back</string>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
        </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label">
-       <property name="font">
-        <font>
-         <pointsize>25</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Add Victim</string>
-       </property>
-      </widget>
-     </item>
-     <item row="13" column="2">
-      <widget class="QPushButton" name="AddVictimDataBtn">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Add</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="2">
-      <widget class="QLineEdit" name="VictimFirstNameField">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-        </font>
-       </property>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </item>

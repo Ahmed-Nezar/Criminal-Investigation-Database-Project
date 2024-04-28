@@ -2,7 +2,7 @@ import pyodbc
 from .globalFunc import *
 
 class Victim:
-    def __init__(self, VictimID, FirstName, LastName, DateOfBirth, Gender, Address, PhoneNumber, Injuries):
+    def __init__(self, VictimID, FirstName, LastName, DateOfBirth, Gender, Address):
         self.VictimID = VictimID
         self.FirstName = FirstName
         self.LastName = LastName
@@ -10,12 +10,10 @@ class Victim:
         self.Age = get_age_from_birthdate(DateOfBirth)
         self.Gender = Gender
         self.Address = Address
-        self.PhoneNumber = PhoneNumber
-        self.Injuries = Injuries
 
     def insert_into_database(self):
         try:
-            values = (self.VictimID, self.FirstName, self.LastName, self.DateOfBirth, self.Age, self.Gender, self.Address, self.PhoneNumber, self.Injuries)
+            values = (self.VictimID, self.FirstName, self.LastName, self.DateOfBirth, self.Age, self.Gender, self.Address)
             insert_into_table("Victim", [values])
             print("Victim inserted successfully.")
 
