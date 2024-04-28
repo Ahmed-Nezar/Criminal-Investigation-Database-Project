@@ -32,3 +32,5 @@ class Victim:
 
         except pyodbc.Error as e:
             print("Error deleting Victim:", e)
+    def search(value):
+        return search_by_primary_key('Victim','VictimID',value)
