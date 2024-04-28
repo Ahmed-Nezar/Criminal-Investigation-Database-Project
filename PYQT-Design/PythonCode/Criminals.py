@@ -56,6 +56,17 @@ class Criminals(QtWidgets.QWidget):
         self.CriminalSearchBtn.setFont(font)
         self.CriminalSearchBtn.setObjectName("CriminalSearchBtn")
         self.horizontalLayout_2.addWidget(self.CriminalSearchBtn)
+        self.CriminalCrimeRecordsBtn = QtWidgets.QPushButton(self)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.CriminalCrimeRecordsBtn.sizePolicy().hasHeightForWidth())
+        self.CriminalCrimeRecordsBtn.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.CriminalCrimeRecordsBtn.setFont(font)
+        self.CriminalCrimeRecordsBtn.setObjectName("CriminalCrimeRecordsBtn")
+        self.horizontalLayout_2.addWidget(self.CriminalCrimeRecordsBtn)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.gridLayout.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
@@ -112,8 +123,8 @@ class Criminals(QtWidgets.QWidget):
         
         self.CriminalsTable = QtWidgets.QTableWidget(self)
         self.CriminalsTable.setObjectName("CriminalsTable")
-        self.CriminalsTable.setColumnCount(5) # Number of columns
-        self.CriminalsTable.setHorizontalHeaderLabels(['CriminalID', 'First Name', 'Last Name', 'Status', 'Description',])
+        self.CriminalsTable.setColumnCount(6) # Number of columns
+        self.CriminalsTable.setHorizontalHeaderLabels(['CriminalID', 'First Name', 'Last Name', 'Status', 'Description','Remove'])
         self.gridLayout.addWidget(self.CriminalsTable, 2, 0, 1, 1)
         self.CriminalSearchBtn.clicked.connect(self.search_criminals)
 
@@ -123,6 +134,7 @@ class Criminals(QtWidgets.QWidget):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("self", "self"))
         self.CriminalSearchBtn.setText(_translate("self", "Search"))
+        self.CriminalCrimeRecordsBtn.setText(_translate("Form", "Crime Records"))
         self.label.setText(_translate("self", "Criminals"))
         self.AddCriminalBtn.setText(_translate("self", "Add"))
         self.BackBtn.setText(_translate("self", "Back"))
@@ -133,6 +145,9 @@ class Criminals(QtWidgets.QWidget):
             for j, data in enumerate(criminal):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.CriminalsTable.setItem(i, j, item)
+            remove_button = QtWidgets.QPushButton("Remove")
+            remove_button.clicked.connect(lambda _, criminal=criminal: self.remove_criminal(criminal))
+            self.CriminalsTable.setCellWidget(i, len(criminal), remove_button)
         self.CriminalsTable.resizeColumnsToContents()
 
 
@@ -152,6 +167,11 @@ class Criminals(QtWidgets.QWidget):
         else:
             self.criminals = Criminal.get_all()
             self.populate_table()
+
+    def remove_criminal(self, criminal):
+        Criminal.delete("CriminalID",criminal[0])
+        self.criminals = Criminal.get_all()
+        self.populate_table()
 
 
 # if __name__ == "__main__":

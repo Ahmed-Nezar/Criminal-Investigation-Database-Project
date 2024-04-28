@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# self implementation generated from reading ui file 'Suspect'sCriminalRecord.ui'
+# self implementation generated from reading ui file 'CriminalCrimeRecord.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -10,14 +10,14 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from Classes.CriminalRecord import CriminalRecord
+from Classes.CrimeRecord import CrimeRecord
 
 
-class SuspectsCriminalRecord(QtWidgets.QWidget):
+class CriminalCrimeRecord(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi()
-        self.criminal_records = CriminalRecord.return_view()
+        self.crime_records = CrimeRecord.return_view()
         self.populate_table()
 
     def setupUi(self):
@@ -59,23 +59,23 @@ class SuspectsCriminalRecord(QtWidgets.QWidget):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
-        self.SuspectCriminalRecordSearchField = QtWidgets.QLineEdit(self)
+        self.CriminalCrimeRecordSearchField = QtWidgets.QLineEdit(self)
         font = QtGui.QFont()
         font.setPointSize(15)
-        self.SuspectCriminalRecordSearchField.setFont(font)
-        self.SuspectCriminalRecordSearchField.setObjectName("SuspectCriminalRecordSearchField")
-        self.horizontalLayout_3.addWidget(self.SuspectCriminalRecordSearchField)
-        self.SuspectCriminalRecordSearchBtn = QtWidgets.QPushButton(self)
+        self.CriminalCrimeRecordSearchField.setFont(font)
+        self.CriminalCrimeRecordSearchField.setObjectName("CriminalCrimeRecordSearchField")
+        self.horizontalLayout_3.addWidget(self.CriminalCrimeRecordSearchField)
+        self.CriminalCrimeRecordSearchBtn = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.SuspectCriminalRecordSearchBtn.sizePolicy().hasHeightForWidth())
-        self.SuspectCriminalRecordSearchBtn.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.CriminalCrimeRecordSearchBtn.sizePolicy().hasHeightForWidth())
+        self.CriminalCrimeRecordSearchBtn.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(15)
-        self.SuspectCriminalRecordSearchBtn.setFont(font)
-        self.SuspectCriminalRecordSearchBtn.setObjectName("SuspectCriminalRecordSearchBtn")
-        self.horizontalLayout_3.addWidget(self.SuspectCriminalRecordSearchBtn)
+        self.CriminalCrimeRecordSearchBtn.setFont(font)
+        self.CriminalCrimeRecordSearchBtn.setObjectName("CriminalCrimeRecordSearchBtn")
+        self.horizontalLayout_3.addWidget(self.CriminalCrimeRecordSearchBtn)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
         self.gridLayout.addLayout(self.horizontalLayout_3, 1, 0, 1, 1)
@@ -99,35 +99,37 @@ class SuspectsCriminalRecord(QtWidgets.QWidget):
         self.gridLayout_2.addItem(spacerItem4, 1, 2, 1, 1)
 
         # Table to display suspects
-        self.SuspectTable = QtWidgets.QTableWidget(self)
-        self.SuspectTable.setObjectName("SuspectTable")
-        self.SuspectTable.setColumnCount(4) # Number of columns
-        self.SuspectTable.setHorizontalHeaderLabels(['SuspectID', 'Name', 'Criminal Record', 'CaseID'])
-        self.gridLayout.addWidget(self.SuspectTable, 2, 0, 1, 1)
+        self.CriminalTable = QtWidgets.QTableWidget(self)
+        self.CriminalTable.setObjectName("CriminalTable")
+        self.CriminalTable.setColumnCount(3) # Number of columns
+        self.CriminalTable.setHorizontalHeaderLabels(['Criminal ID', 'Name', 'Crime Record'])
+        self.gridLayout.addWidget(self.CriminalTable, 2, 0, 1, 1)
 
-        self.SuspectCriminalRecordSearchBtn.clicked.connect(self.search_table)
+        self.CriminalCrimeRecordSearchBtn.clicked.connect(self.search_table)
 
         self.retranslateUi()
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("self", "self"))
-        self.label.setText(_translate("self", "Suspect\'s Criminal Record"))
+        self.label.setText(_translate("self", "Ciminal Crime Record"))
         self.BackBtn.setText(_translate("self", "Back"))
-        self.SuspectCriminalRecordSearchBtn.setText(_translate("Form", "Search"))
+        self.CriminalCrimeRecordSearchBtn.setText(_translate("self", "Search"))
 
     def populate_table(self):
-        self.SuspectTable.setRowCount(len(self.criminal_records))
+        self.crime_records = CrimeRecord.return_view()
+        self.CriminalTable.setRowCount(len(self.crime_records))
         
-        for i, suspect in enumerate(self.criminal_records):
+        for i, suspect in enumerate(self.crime_records):
             for j, data in enumerate(suspect):
                 item = QtWidgets.QTableWidgetItem(str(data))
-                self.SuspectTable.setItem(i, j, item)
-        self.SuspectTable.resizeColumnsToContents()
+                self.CriminalTable.setItem(i, j, item)
+        self.CriminalTable.resizeColumnsToContents()
 
     def search_table(self):
-        search_value = self.SuspectCriminalRecordSearchField.text()
-        self.SuspectCriminalRecordSearchField.clear()
+        self.crime_records = CrimeRecord.return_view()
+        search_value = self.CriminalCrimeRecordSearchField.text()
+        self.CriminalCrimeRecordSearchField.clear()
         
         if search_value:
             try:
@@ -140,7 +142,7 @@ class SuspectsCriminalRecord(QtWidgets.QWidget):
                 msg.exec_()
                 return
             suspects = []
-            for suspect in self.criminal_records:
+            for suspect in self.crime_records:
                 if search_value in suspect:
                     suspects.append(suspect)
             if suspects == []:
@@ -150,17 +152,16 @@ class SuspectsCriminalRecord(QtWidgets.QWidget):
                 msg.setWindowTitle("Search")
                 msg.exec_()
             else:
-                self.SuspectTable.setRowCount(len(suspects))
+                self.CriminalTable.setRowCount(len(suspects))
         
                 for i, suspect in enumerate(suspects):
                     for j, data in enumerate(suspect):
                         item = QtWidgets.QTableWidgetItem(str(data))
-                        self.SuspectTable.setItem(i, j, item)
-                self.SuspectTable.resizeColumnsToContents()
+                        self.CriminalTable.setItem(i, j, item)
+                self.CriminalTable.resizeColumnsToContents()
         else:
             
             self.populate_table()
-               
 
 
 # if __name__ == "__main__":

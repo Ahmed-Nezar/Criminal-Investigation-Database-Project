@@ -22,6 +22,8 @@ class Criminal:
         return get_all_ids("Criminal",columns_name)
     def delete(primary_key, values):
         try:
+            delete_from_table("Arrest", primary_key, values)
+            delete_from_table("CrimeRecord", primary_key, values)
             delete_from_table("Criminal", primary_key, values)
 
         except pyodbc.Error as e:
