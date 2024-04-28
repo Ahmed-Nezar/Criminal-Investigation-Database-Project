@@ -13,19 +13,21 @@ class Case:
     def insert_into_database(self):
         try:
             values = (self.CaseID, self.StartDate, self.EndDate, self.Description, self.Status, self.OfficerID)
-            insert_into_table("Case", [values])
+            insert_into_table("_Case_", [values])
             print("Case inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Case:", e)
     def get_all():
-        return get_all_ids("Case","*")
+        return get_all_ids("_Case_","*")
     def get_columns(columns_name):
-        return get_all_ids("Case",columns_name)
+        return get_all_ids("_Case_",columns_name)
     def delete(primary_key, values):
         try:
-            delete_from_table("Case", primary_key, values)
+            delete_from_table("_Case_", primary_key, values)
             print("Case deleted successfully.")
 
         except pyodbc.Error as e:
             print("Error deleting Case:", e)
+    def search(value):
+        return search_by_primary_key('_Case_','CaseID',value)
