@@ -91,10 +91,12 @@ class SuspectsCriminalRecord(QtWidgets.QWidget):
 
     def populate_table(self):
         self.SuspectTable.setRowCount(len(self.criminal_records))
+        
         for i, suspect in enumerate(self.criminal_records):
             for j, data in enumerate(suspect):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.SuspectTable.setItem(i, j, item)
+        self.SuspectTable.resizeColumnsToContents()
                
 
 
