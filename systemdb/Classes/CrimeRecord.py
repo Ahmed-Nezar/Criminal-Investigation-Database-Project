@@ -1,31 +1,30 @@
 import pyodbc
 from .globalFunc import *
 
-class CrimeScene:
-    def __init__(self, CaseID, Time, Location):
-        self.CaseID = CaseID
-        self.Time = Time
-        self.Location = Location
-
+class CrimeRecord:
+    
+    def __init__(self, CrimeID, CrimeRecord):
+        self.CrimeID = CrimeID
+        self.CrimeRecord = CrimeRecord
     def insert_into_database(self):
         try:
-            values = (self.CaseID, self.Time, self.Location)
-            insert_into_table("CrimeScene", [values])
-            print("CrimeScene inserted successfully.")
+            values = (self.CrimeID, self.CrimeRecord)
+            insert_into_table("CrimeRecord", [values])
+            print("CrimeRecord inserted successfully.")
 
         except pyodbc.Error as e:
-            print("Error inserting CrimeScene:", e)
+            print("Error inserting CrimeRecord:", e)
     def get_all():
-        return get_all_ids("CrimeScene","*")
+        return get_all_ids("CrimeRecord","*")
     def get_columns(columns_name):
-        return get_all_ids("CrimeScene",columns_name)
+        return get_all_ids("CrimeRecord",columns_name)
     def delete(primary_key, values):
         try:
-            delete_from_table("CrimeScene", primary_key, values)
-            print("CrimeScene deleted successfully.")
+            delete_from_table("CrimeRecord", primary_key, values)
+            print("CrimeRecord deleted successfully.")
 
         except pyodbc.Error as e:
-            print("Error deleting CrimeScene:", e)
+            print("Error deleting CrimeRecord:", e)
     
     def return_view():
         cursor = None
@@ -41,8 +40,8 @@ class CrimeScene:
             cursor = conn.cursor()
 
             # Construct the SQL query dynamically
-            query = """select CrimeScene.CaseID, Time, Location, Evidence.Type, Description from CrimeScene 
-                        Join Evidence on CrimeScene.CaseID = Evidence.CaseID;"""
+            query = """select Criminal.CriminalID,FirstName+ ' '+LastName as Name,CrimeRecord from Criminal join CrimeRecord on
+                        Criminal.CriminalID = CrimeRecord.CriminalID;"""
             
             cursor.execute(query)
             print("The code is run successfully.")

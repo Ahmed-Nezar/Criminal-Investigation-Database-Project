@@ -26,3 +26,40 @@ class Arrest:
 
         except pyodbc.Error as e:
             print("Error deleting Arrest:", e)
+    
+    def return_view():
+        cursor = None
+        conn = None
+        try:
+            conn = pyodbc.connect(
+                "Driver={ODBC Driver 18 for SQL Server};"
+                "Server=.;"
+                "Database=Criminal Investigation System;"
+                "Trusted_Connection=yes;"
+                "Encrypt=no;"
+            )
+            cursor = conn.cursor()
+
+            # Construct the SQL query dynamically
+            query = """select Officer.OfficerID, Arrest.CriminalID, Officer.FirstName+' '+Officer.LastName as OfficerName,  
+                    Criminal.FirstName+' '+Criminal.LastName as CriminalName, Arrest.ArrestDate From Officer join Arrest on Officer.OfficerID=Arrest.OfficerID 
+                    join Criminal on Criminal.CriminalID = Arrest.CriminalID;"""
+            
+            cursor.execute(query)
+            print("The code is run successfully.")
+            ids = []
+            
+            for row in cursor:
+                ids.append(row)
+
+        except pyodbc.Error as e:
+            print("Error excuting values into:", e)
+
+        finally:
+            
+            if cursor:
+                cursor.close()  
+            if conn:
+                conn.close()
+        
+        return ids
