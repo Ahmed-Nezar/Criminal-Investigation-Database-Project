@@ -125,7 +125,7 @@ class Officers(QtWidgets.QWidget):
         self.officersTable.setObjectName("officersTable")
         self.officersTable.setColumnCount(9) # Number of columns
         self.officersTable.setHorizontalHeaderLabels(['OfficerID', 'First Name', 'Last Name', 'Date of Birth',
-                                                      'Gender','SuperID','Badge Number','StationID','Rank'])
+                                                      'Gender','Badge Number','Rank','SuperID','StationID'])
         self.gridLayout.addWidget(self.officersTable, 2, 0, 1, 1)
         self.OfficerSearchBtn.clicked.connect(self.search_officers)
         
