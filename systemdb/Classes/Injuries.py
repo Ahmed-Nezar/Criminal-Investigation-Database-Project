@@ -31,3 +31,39 @@ class Injuries:
 
     def search(value):
         return search_by_primary_key('Injuries', 'Victim_ID', value)
+    
+    def return_view():
+        cursor = None
+        conn = None
+        try:
+            conn = pyodbc.connect(
+                "Driver={ODBC Driver 18 for SQL Server};"
+                "Server=.;"
+                "Database=Criminal Investigation System;"
+                "Trusted_Connection=yes;"
+                "Encrypt=no;"
+            )
+            cursor = conn.cursor()
+
+            # Construct the SQL query dynamically
+            query = """Select Victim.VictimID,FirstName+' '+LastName as Name,Injuries.Injury from Victim join Injuries
+                    on Victim.VictimID=Injuries.Victim_ID;"""
+            
+            cursor.execute(query)
+            print("The code is run successfully.")
+            ids = []
+            
+            for row in cursor:
+                ids.append(row)
+
+        except pyodbc.Error as e:
+            print("Error excuting values into:", e)
+
+        finally:
+            
+            if cursor:
+                cursor.close()  
+            if conn:
+                conn.close()
+        
+        return ids
