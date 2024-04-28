@@ -15,6 +15,7 @@ from AddCriminal import AddCriminal
 from AddSuspect import AddSuspect
 from AddVictim import AddVictim
 from AddWitness import AddWitness
+from DatabaseManagerSQL import DatabaseManagerSQL
 
 import pyodbc
 from PyQt5.QtWidgets import QMessageBox
@@ -42,9 +43,11 @@ class MainWindow(QMainWindow):
         self.add_suspect = AddSuspect()
         self.add_victim = AddVictim()
         self.add_witness = AddWitness()
+        self.db_manager = DatabaseManagerSQL()
 
         self.stacked_widget.addWidget(self.start_menu)
         self.stacked_widget.addWidget(self.login)
+        self.stacked_widget.addWidget(self.db_manager)
         self.stacked_widget.addWidget(self.officer_main_menu)
         self.stacked_widget.addWidget(self.cases)
         self.stacked_widget.addWidget(self.criminals)
@@ -58,9 +61,17 @@ class MainWindow(QMainWindow):
         self.stacked_widget.addWidget(self.add_suspect)
         self.stacked_widget.addWidget(self.add_victim)
         self.stacked_widget.addWidget(self.add_witness)
+        self.stacked_widget.setCurrentWidget(self.start_menu)
 
+        # Start Menu Buttons
         self.start_menu.OfficerMenuBtn.clicked.connect(self.show_login)
+        self.start_menu.DatabaseManagerBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.db_manager))
+        self.db_manager.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.start_menu))
+
+        # Login Button
         self.login.LoginSubmitBtn.clicked.connect(self.show_officer_menu)
+
+        # Officer Main Menu Buttons
         self.officer_main_menu.CasesBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.cases))
         self.officer_main_menu.CriminalsBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.criminals))
         self.officer_main_menu.SuspectsBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.suspects))
