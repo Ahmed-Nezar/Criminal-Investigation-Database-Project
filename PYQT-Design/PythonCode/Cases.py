@@ -123,9 +123,9 @@ class Cases(QtWidgets.QWidget):
         
         self.CasesTable = QtWidgets.QTableWidget(self)
         self.CasesTable.setObjectName("CasesTable")
-        self.CasesTable.setColumnCount(6) # Number of columns
+        self.CasesTable.setColumnCount(7) # Number of columns
         self.CasesTable.setHorizontalHeaderLabels(['CaseID', 'Start Date', 'End Date', 'Description',
-                                                      'Status','OfficerID',])
+                                                      'Status','OfficerID','Remove'])
         self.gridLayout.addWidget(self.CasesTable, 2, 0, 1, 1)
         self.CaseSearchBtn.clicked.connect(self.search_Cases)
 
@@ -143,6 +143,9 @@ class Cases(QtWidgets.QWidget):
             for j, data in enumerate(Case):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.CasesTable.setItem(i, j, item)
+            remove_button = QtWidgets.QPushButton("Remove")
+            remove_button.clicked.connect(lambda _, Case=Case: self.remove_Case(Case))
+            self.CasesTable.setCellWidget(i, 6, remove_button)
         self.CasesTable.resizeColumnsToContents()
         
     def search_Cases(self):
@@ -161,6 +164,12 @@ class Cases(QtWidgets.QWidget):
         else:
             self.Cases = Case.get_all()
             self.populate_table()
+            
+    def remove_Case(self, case):
+        Case.delete("CaseID",case[0])
+        self.Cases = Case.get_all()
+        self.populate_table()
+        
         
 
 

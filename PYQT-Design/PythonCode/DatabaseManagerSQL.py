@@ -85,6 +85,7 @@ class DatabaseManagerSQL(QtWidgets.QWidget):
         self.label.setText(_translate("self", "Write SQL Query"))
         self.ExecuteSQLBtn.setText(_translate("self", "Execute"))
         self.BackBtn.setText(_translate("self", "Back"))
+        
 
 
 # if __name__ == "__main__":
