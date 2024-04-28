@@ -66,7 +66,7 @@ class MainWindow(QMainWindow):
             self.stacked_widget.setCurrentWidget(self.officer_main_menu)
         else:
             QMessageBox.information(self, "Invalid ID", "The ID you entered is invalid.")
-            self.show_login()\
+            self.show_login()
             
     def BackToOfficerMenu(self):
         self.stacked_widget.setCurrentWidget(self.officer_main_menu)

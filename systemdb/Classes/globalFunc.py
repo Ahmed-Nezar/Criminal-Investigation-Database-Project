@@ -5,11 +5,15 @@ def get_age_from_birthdate(birth_date):
     conn = None
     cursor = None
     try:
-        conn = pyodbc.connect('Driver={SQL Server};'
-                              'Server=.;'
-                              'Database=Criminal Investigation System;'
-                              'Trusted_Connection=yes;')
+        conn = pyodbc.connect(
+            "Driver={ODBC Driver 18 for SQL Server};"
+            "Server=.;"
+            "Database=Criminal Investigation System;"
+            "Trusted_Connection=yes;"
+            "Encrypt=no;"
+        )
         cursor = conn.cursor()
+
 
         # Call the SQL function CalculateAge
         query = "SELECT dbo.CalculateAge(?) AS Age"
@@ -33,10 +37,13 @@ def insert_into_table(table_name, values):
     cursor = None
     conn = None
     try:
-        conn = pyodbc.connect('Driver={SQL Server};'
-                               'Server=.;'
-                               'Database=Criminal Investigation System;'
-                               'Trusted_Connection=yes;')
+        conn = pyodbc.connect(
+            "Driver={ODBC Driver 18 for SQL Server};"
+            "Server=.;"
+            "Database=Criminal Investigation System;"
+            "Trusted_Connection=yes;"
+            "Encrypt=no;"
+        )
         cursor = conn.cursor()
 
         placeholders = ','.join(['?' for _ in range(len(values[0]))])
@@ -62,10 +69,13 @@ def delete_from_table(table_name, primary_keys, values):
     cursor = None
     conn = None
     try:
-        conn = pyodbc.connect('Driver={SQL Server};'
-                               'Server=.;'
-                               'Database=Criminal Investigation System;'
-                               'Trusted_Connection=yes;')
+        conn = pyodbc.connect(
+            "Driver={ODBC Driver 18 for SQL Server};"
+            "Server=.;"
+            "Database=Criminal Investigation System;"
+            "Trusted_Connection=yes;"
+            "Encrypt=no;"
+        )
         cursor = conn.cursor()
         if isinstance(primary_keys, str):
             primary_keys = [primary_keys]  
@@ -91,10 +101,13 @@ def writequery(code):
     cursor = None
     conn = None
     try:
-        conn = pyodbc.connect('Driver={SQL Server};'
-                               'Server=.;'
-                               'Database=Criminal Investigation System;'
-                               'Trusted_Connection=yes;')
+        conn = pyodbc.connect(
+            "Driver={ODBC Driver 18 for SQL Server};"
+            "Server=.;"
+            "Database=Criminal Investigation System;"
+            "Trusted_Connection=yes;"
+            "Encrypt=no;"
+        )
         cursor = conn.cursor()
 
         # Construct the SQL query dynamically
@@ -118,10 +131,13 @@ def get_all_ids(table_name, primary_keys):
     conn = None
     ids=[]
     try:
-        conn = pyodbc.connect('Driver={SQL Server};'
-                               'Server=.;'
-                               'Database=Criminal Investigation System;'
-                               'Trusted_Connection=yes;')
+        conn = pyodbc.connect(
+            "Driver={ODBC Driver 18 for SQL Server};"
+            "Server=.;"
+            "Database=Criminal Investigation System;"
+            "Trusted_Connection=yes;"
+            "Encrypt=no;"
+        )
         cursor = conn.cursor()
 
         
@@ -156,10 +172,13 @@ def search_by_primary_key(table_name, primary_key, value):
     cursor = None
     conn = None
     try:
-        conn = pyodbc.connect('Driver={SQL Server};'
-                               'Server=.;'
-                               'Database=Criminal Investigation System;'
-                               'Trusted_Connection=yes;')
+        conn = pyodbc.connect(
+            "Driver={ODBC Driver 18 for SQL Server};"
+            "Server=.;"
+            "Database=Criminal Investigation System;"
+            "Trusted_Connection=yes;"
+            "Encrypt=no;"
+        )
         cursor = conn.cursor()
         
         query = f'SELECT * FROM {table_name} WHERE {primary_key} = ?'

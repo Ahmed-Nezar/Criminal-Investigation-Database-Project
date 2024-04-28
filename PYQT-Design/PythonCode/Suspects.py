@@ -12,6 +12,8 @@ class Suspects(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi()
+        self.suspects =  Suspect.get_all()
+        self.populate_table()
 
     def setupUi(self):
         self.setObjectName("Suspects")
@@ -52,6 +54,7 @@ class Suspects(QtWidgets.QWidget):
         font.setPointSize(15)
         self.SuspectSearchBtn.setFont(font)
         self.SuspectSearchBtn.setObjectName("SuspectSearchBtn")
+        self.SuspectSearchBtn.clicked.connect(self.search_suspects)
         self.horizontalLayout_2.addWidget(self.SuspectSearchBtn)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
@@ -60,8 +63,8 @@ class Suspects(QtWidgets.QWidget):
         # Table to display suspects
         self.SuspectTable = QtWidgets.QTableWidget(self)
         self.SuspectTable.setObjectName("SuspectTable")
-        self.SuspectTable.setColumnCount(10) # Number of columns
-        self.SuspectTable.setHorizontalHeaderLabels(['SuspectID', 'First Name', 'Last Name', 'Gender', 'Date of Birth', 'Phone Record', ' Street', ' Government', ' ZIP', 'Criminal Record'])
+        self.SuspectTable.setColumnCount(9) # Number of columns
+        self.SuspectTable.setHorizontalHeaderLabels(['SuspectID', 'First Name', 'Last Name', 'Gender', 'Date of Birth', 'Phone Record', ' Street', ' Government', ' ZIP'])
         self.gridLayout.addWidget(self.SuspectTable, 2, 0, 1, 1)
         
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -112,20 +115,29 @@ class Suspects(QtWidgets.QWidget):
         self.AddSuspectBtn.setText(_translate("self", "Add"))
         self.BackBtn.setText(_translate("self", "Back"))
     
-    def populate_table(self, suspects):
-        self.SuspectTable.setRowCount(len(suspects))
-        for i, suspect in enumerate(suspects):
+    def populate_table(self):
+        self.SuspectTable.setRowCount(len(self.suspects))
+        for i, suspect in enumerate(self.suspects):
             for j, data in enumerate(suspect):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.SuspectTable.setItem(i, j, item)
 
     def search_suspects(self):
         search_value = self.SuspectSearchField.text()
+        self.SuspectSearchField.clear() 
         if search_value:
-            suspects = Suspect.search(search_value)
-            self.populate_table(suspects)
+            self.suspects = Suspect.search(search_value)
+            if not self.suspects:
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText("No suspects found")
+                msg.setWindowTitle("Search")
+                msg.exec_()
+            else:
+                self.populate_table()
         else:
-            print("Please enter a search value.")
+            self.suspects = Suspect.get_all()
+            self.populate_table()
 
 # if __name__ == "__main__":
 #     app = QtWidgets.QApplication(sys.argv)
