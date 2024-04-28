@@ -141,11 +141,11 @@ ADD CONSTRAINT FK_SationID_Officer FOREIGN KEY(StationID) REFERENCES PoliceStati
 -- Arrest table
 CREATE TABLE Arrest (
     OfficerID INT,
-    CaseID INT,
+    CriminalID INT,
     ArrestDate DATE,
-    PRIMARY KEY (OfficerID, CaseID, ArrestDate),
+    PRIMARY KEY (OfficerID, CriminalID, ArrestDate),
     FOREIGN KEY (OfficerID) REFERENCES Officer(OfficerID),
-    FOREIGN KEY (CaseID) REFERENCES _Case_(CaseID)
+    FOREIGN KEY (CriminalID) REFERENCES Criminal(CriminalID)
 );
 
 -- Interrogates table
