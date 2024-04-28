@@ -33,3 +33,5 @@ class Officer:
 
         except pyodbc.Error as e:
             print("Error deleting Officer:", e)
+    def search(value):
+        return search_by_primary_key('Officer','OfficerID',value)
