@@ -84,8 +84,8 @@ class Witnesses(QtWidgets.QWidget):
 
         self.WitnessTable = QtWidgets.QTableWidget(self)
         self.WitnessTable.setObjectName("WitnessTable")
-        self.WitnessTable.setColumnCount(7) # Number of columns
-        self.WitnessTable.setHorizontalHeaderLabels(['VictimID', 'First Name', 'Last Name', 'Date of Birht', 'Gender', 'Age', 'Address'])
+        self.WitnessTable.setColumnCount(8) # Number of columns
+        self.WitnessTable.setHorizontalHeaderLabels(['VictimID', 'First Name', 'Last Name', 'Date of Birht', 'Gender', 'Age', 'Address','Delete'])
         self.gridLayout.addWidget(self.WitnessTable, 2, 0, 1, 1)
 
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -142,6 +142,9 @@ class Witnesses(QtWidgets.QWidget):
             for j, data in enumerate(Witness):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.WitnessTable.setItem(i, j, item)
+            remove_button = QtWidgets.QPushButton("Remove")
+            remove_button.clicked.connect(lambda _, Witness=Witness: self.remove_Witnesses(Witness))
+            self.WitnessTable.setCellWidget(i, len(Witness), remove_button)
 
     def search_Witnesses(self):
         search_value = self.WitnessSearchField.text()
@@ -151,7 +154,7 @@ class Witnesses(QtWidgets.QWidget):
             if not self.Witnesses:
                 msg = QtWidgets.QMessageBox()
                 msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText("No suspects found")
+                msg.setText("No Witness found")
                 msg.setWindowTitle("Search")
                 msg.exec_()
             else:
@@ -159,6 +162,10 @@ class Witnesses(QtWidgets.QWidget):
         else:
             self.Witnesses = Witness.get_all()
             self.populate_table()
+    def remove_Witnesses(self, suspect_row):
+        Witness.delete('WitnessID',suspect_row[0])
+        self.Witnesses = Witness.get_all()
+        self.populate_table()
 
 # if __name__ == "__main__":
 #     import sys
