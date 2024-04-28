@@ -81,7 +81,6 @@ def delete_from_table(table_name, primary_keys, values):
 
         cursor.execute(query, values)  
         conn.commit()
-        print("Record(s) deleted successfully from", table_name + ".")
 
     except pyodbc.Error as e:
         print("Error deleting record(s) from", table_name + ":", e)

@@ -11,6 +11,8 @@ import os
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Classes.Criminal import Criminal 
+from Classes.CrimeRecord import CrimeRecord
+from Classes.Arrest import Arrest
 
 curr_dir = os.path.dirname('systemdb\Classes\Criminal.py')
 parent_dir = os.path.dirname(curr_dir)
@@ -121,8 +123,8 @@ class Criminals(QtWidgets.QWidget):
         
         self.CriminalsTable = QtWidgets.QTableWidget(self)
         self.CriminalsTable.setObjectName("CriminalsTable")
-        self.CriminalsTable.setColumnCount(5) # Number of columns
-        self.CriminalsTable.setHorizontalHeaderLabels(['CriminalID', 'First Name', 'Last Name', 'Status', 'Description',])
+        self.CriminalsTable.setColumnCount(6) # Number of columns
+        self.CriminalsTable.setHorizontalHeaderLabels(['CriminalID', 'First Name', 'Last Name', 'Status', 'Description','Remove'])
         self.gridLayout.addWidget(self.CriminalsTable, 2, 0, 1, 1)
         self.CriminalSearchBtn.clicked.connect(self.search_criminals)
 
@@ -142,6 +144,9 @@ class Criminals(QtWidgets.QWidget):
             for j, data in enumerate(criminal):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.CriminalsTable.setItem(i, j, item)
+            remove_button = QtWidgets.QPushButton("Remove")
+            remove_button.clicked.connect(lambda _, criminal=criminal: self.remove_criminal(criminal))
+            self.CriminalsTable.setCellWidget(i, 5, remove_button)
         self.CriminalsTable.resizeColumnsToContents()
 
 
@@ -161,6 +166,12 @@ class Criminals(QtWidgets.QWidget):
         else:
             self.criminals = Criminal.get_all()
             self.populate_table()
+    def remove_criminal(self, criminal):
+        Arrest.delete("CriminalID", criminal[0])
+        CrimeRecord.delete("CriminalID", criminal[0])
+        Criminal.delete("CriminalID", criminal[0])
+        self.criminals = Criminal.get_all()
+        self.populate_table()
 
 
 # if __name__ == "__main__":

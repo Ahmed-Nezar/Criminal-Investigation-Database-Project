@@ -23,7 +23,6 @@ class Criminal:
     def delete(primary_key, values):
         try:
             delete_from_table("Criminal", primary_key, values)
-            print("Criminal deleted successfully.")
 
         except pyodbc.Error as e:
             print("Error deleting Criminal:", e)
