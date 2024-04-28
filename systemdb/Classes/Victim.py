@@ -26,7 +26,6 @@ class Victim:
     def delete(primary_key, values):
         try:
             delete_from_table("Victim", primary_key, values)
-            print("Victim deleted successfully.")
 
         except pyodbc.Error as e:
             print("Error deleting Victim:", e)

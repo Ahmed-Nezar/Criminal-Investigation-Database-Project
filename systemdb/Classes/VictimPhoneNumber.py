@@ -10,7 +10,6 @@ class VictimPhoneNumber:
         try:
             values = (self.VictimID, self.PhoneNumber)
             insert_into_table("Victim_Phone_Number", [values])
-            print("Victim Phone Number inserted successfully.")
 
         except pyodbc.Error as e:
             print("Error inserting Victim Phone Number:", e)

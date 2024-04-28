@@ -14,6 +14,9 @@ curr_dir = os.path.dirname('systemdb\Classes\Victim.py')
 parent_dir = os.path.dirname(curr_dir)
 sys.path.insert(0, parent_dir)
 from Classes.Victim import Victim
+from Classes.VictimPhoneNumber import VictimPhoneNumber
+from Classes.Injuries import Injuries
+from Classes.Affects import Affects
 
 class Victims(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -83,8 +86,8 @@ class Victims(QtWidgets.QWidget):
 
         self.VictimTable = QtWidgets.QTableWidget(self)
         self.VictimTable.setObjectName("VictimTable")
-        self.VictimTable.setColumnCount(7) # Number of columns
-        self.VictimTable.setHorizontalHeaderLabels(['VictimID', 'First Name', 'Last Name', 'Date of Birht', 'Age', 'Gender', 'Address'])
+        self.VictimTable.setColumnCount(8) # Number of columns
+        self.VictimTable.setHorizontalHeaderLabels(['VictimID', 'First Name', 'Last Name', 'Date of Birht', 'Age', 'Gender', 'Address','Remove'])
         self.gridLayout.addWidget(self.VictimTable, 2, 0, 1, 1)
 
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -137,10 +140,13 @@ class Victims(QtWidgets.QWidget):
 
     def populate_table(self):
         self.VictimTable.setRowCount(len(self.victims))
-        for i, Victim in enumerate(self.victims):
-            for j, data in enumerate(Victim):
+        for i, victim in enumerate(self.victims):
+            for j, data in enumerate(victim):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.VictimTable.setItem(i, j, item)
+            remove_btn = QtWidgets.QPushButton("Remove")
+            remove_btn.clicked.connect(lambda _, victim=victim: self.remove_victim(victim))
+            self.VictimTable.setCellWidget(i, 7, remove_btn)
 
     def search_victims(self):
         search_value = self.VictimSearchField.text()
@@ -158,6 +164,13 @@ class Victims(QtWidgets.QWidget):
         else:
             self.victims = Victim.get_all()
             self.populate_table()
+    def remove_victim(self, victim):
+        Affects.delete('VictimID', victim[0])
+        Injuries.delete('Victim_ID', victim[0])
+        VictimPhoneNumber.delete('Victim_ID', victim[0])    
+        Victim.delete('VictimID', victim[0])
+        self.victims = Victim.get_all()
+        self.populate_table()
 
 # if __name__ == "__main__":
 #     import sys

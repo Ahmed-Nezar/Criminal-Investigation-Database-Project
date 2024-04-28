@@ -21,7 +21,6 @@ class Affects:
     def delete(primary_key, values):
         try:
             delete_from_table("Affects", primary_key, values)
-            print("Affects deleted successfully.")
 
         except pyodbc.Error as e:
             print("Error deleting Affects:", e)
