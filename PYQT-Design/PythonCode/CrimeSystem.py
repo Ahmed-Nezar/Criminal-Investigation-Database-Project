@@ -9,6 +9,13 @@ from Suspects import Suspects
 from Victims import Victims
 from Witnesses import Witnesses
 from Officers import Officers
+from AddOfficer import AddOfficer
+from AddCase import AddCase
+from AddCriminal import AddCriminal
+from AddSuspect import AddSuspect
+from AddVictim import AddVictim
+from AddWitness import AddWitness
+
 import pyodbc
 from PyQt5.QtWidgets import QMessageBox
 
@@ -29,6 +36,12 @@ class MainWindow(QMainWindow):
         self.victims = Victims()
         self.witnesses = Witnesses()
         self.officers = Officers()
+        self.add_officer = AddOfficer()
+        self.add_case = AddCase()
+        self.add_criminal = AddCriminal()
+        self.add_suspect = AddSuspect()
+        self.add_victim = AddVictim()
+        self.add_witness = AddWitness()
 
         self.stacked_widget.addWidget(self.start_menu)
         self.stacked_widget.addWidget(self.login)
@@ -39,6 +52,12 @@ class MainWindow(QMainWindow):
         self.stacked_widget.addWidget(self.victims)
         self.stacked_widget.addWidget(self.witnesses)
         self.stacked_widget.addWidget(self.officers)
+        self.stacked_widget.addWidget(self.add_officer)
+        self.stacked_widget.addWidget(self.add_case)
+        self.stacked_widget.addWidget(self.add_criminal)
+        self.stacked_widget.addWidget(self.add_suspect)
+        self.stacked_widget.addWidget(self.add_victim)
+        self.stacked_widget.addWidget(self.add_witness)
 
         self.start_menu.OfficerMenuBtn.clicked.connect(self.show_login)
         self.login.LoginSubmitBtn.clicked.connect(self.show_officer_menu)
@@ -56,6 +75,27 @@ class MainWindow(QMainWindow):
         self.victims.BackBtn.clicked.connect(self.BackToOfficerMenu)
         self.witnesses.BackBtn.clicked.connect(self.BackToOfficerMenu)
         self.officers.BackBtn.clicked.connect(self.BackToOfficerMenu)
+
+        self.officers.AddOfficerBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.add_officer))
+        self.add_officer.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.officers))
+
+        self.cases.AddCaseBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.add_case))
+        self.add_case.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.cases))
+
+        self.criminals.AddCriminalBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.add_criminal))
+        self.add_criminal.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.criminals))
+
+        self.suspects.AddSuspectBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.add_suspect))
+        self.add_suspect.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.suspects))
+
+        self.victims.AddVictimBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.add_victim))
+        self.add_victim.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.victims))
+
+        self.witnesses.AddWitnessBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.add_witness))
+        self.add_witness.BackBtn.clicked.connect(lambda: self.stacked_widget.setCurrentWidget(self.witnesses))
+
+
+        
 
 
     def show_login(self):
