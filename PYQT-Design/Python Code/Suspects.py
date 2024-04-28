@@ -2,7 +2,7 @@ import sys
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-curr_dir = os.path.dirname('C:\\Users\\dell\\Desktop\\Database-Project\\systemdb\\Classes\\Suspect.py')
+curr_dir = os.path.dirname('systemdb\Classes\Suspect.py')
 parent_dir = os.path.dirname(curr_dir)
 sys.path.insert(0, parent_dir)
 from Classes.Suspect import Suspect
@@ -131,6 +131,6 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     suspects = Suspect.get_all()  
     ui.populate_table(suspects)
-    ui.SuspectSearchBtn.clicked.connect(ui.search_suspects)  # Connect search button to search function
+    ui.SuspectSearchBtn.clicked.connect(ui.search_suspects) 
     Form.show()
     sys.exit(app.exec_())
