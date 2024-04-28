@@ -18,7 +18,7 @@ class StartMenu(QtWidgets.QWidget):
 
     def setupUi(self):
         self.setObjectName("StartMenu")
-        self.resize(579, 440)
+        self.resize(600, 900)
         self.gridLayout = QtWidgets.QGridLayout(self)
         self.gridLayout.setObjectName("gridLayout")
 

@@ -1,6 +1,6 @@
 {
     "python.analysis.extraPaths": [
         "./systemdb",
-        "./PYQT-Design/Python Code"
+        "./PYQT-Design/PythonCode"
     ]
 }

@@ -8,16 +8,20 @@ sys.path.insert(0, parent_dir)
 from Classes.Suspect import Suspect
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(1007, 678)
+class Suspects(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi()
+
+    def setupUi(self):
+        self.setObjectName("Suspects")
+        self.resize(1007, 678)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
-        Form.setSizePolicy(sizePolicy)
-        self.gridLayout_2 = QtWidgets.QGridLayout(Form)
+        sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
+        self.setSizePolicy(sizePolicy)
+        self.gridLayout_2 = QtWidgets.QGridLayout(self)
         self.gridLayout_2.setObjectName("gridLayout_2")
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout_2.addItem(spacerItem, 0, 1, 1, 1)
@@ -27,7 +31,7 @@ class Ui_Form(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
-        self.SuspectSearchField = QtWidgets.QLineEdit(Form)
+        self.SuspectSearchField = QtWidgets.QLineEdit(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -38,7 +42,7 @@ class Ui_Form(object):
         self.SuspectSearchField.setFont(font)
         self.SuspectSearchField.setObjectName("SuspectSearchField")
         self.horizontalLayout_2.addWidget(self.SuspectSearchField)
-        self.SuspectSearchBtn = QtWidgets.QPushButton(Form)
+        self.SuspectSearchBtn = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -54,7 +58,7 @@ class Ui_Form(object):
         self.gridLayout.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
         
         # Table to display suspects
-        self.SuspectTable = QtWidgets.QTableWidget(Form)
+        self.SuspectTable = QtWidgets.QTableWidget(self)
         self.SuspectTable.setObjectName("SuspectTable")
         self.SuspectTable.setColumnCount(10) # Number of columns
         self.SuspectTable.setHorizontalHeaderLabels(['SuspectID', 'First Name', 'Last Name', 'Gender', 'Date of Birth', 'Phone Record', ' Street', ' Government', ' ZIP', 'Criminal Record'])
@@ -62,14 +66,14 @@ class Ui_Form(object):
         
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label = QtWidgets.QLabel(Form)
+        self.label = QtWidgets.QLabel(self)
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
-        self.AddSuspectBtn = QtWidgets.QPushButton(Form)
+        self.AddSuspectBtn = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -80,7 +84,7 @@ class Ui_Form(object):
         self.AddSuspectBtn.setFont(font)
         self.AddSuspectBtn.setObjectName("AddSuspectBtn")
         self.horizontalLayout.addWidget(self.AddSuspectBtn)
-        self.BackBtn = QtWidgets.QPushButton(Form)
+        self.BackBtn = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -98,16 +102,15 @@ class Ui_Form(object):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem4, 1, 2, 1, 1)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.SuspectSearchBtn.setText(_translate("Form", "Search"))
-        self.label.setText(_translate("Form", "Suspects"))
-        self.AddSuspectBtn.setText(_translate("Form", "Add"))
-        self.BackBtn.setText(_translate("Form", "Back"))
+        self.setWindowTitle(_translate("self", "self"))
+        self.SuspectSearchBtn.setText(_translate("self", "Search"))
+        self.label.setText(_translate("self", "Suspects"))
+        self.AddSuspectBtn.setText(_translate("self", "Add"))
+        self.BackBtn.setText(_translate("self", "Back"))
     
     def populate_table(self, suspects):
         self.SuspectTable.setRowCount(len(suspects))
@@ -124,13 +127,13 @@ class Ui_Form(object):
         else:
             print("Please enter a search value.")
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    suspects = Suspect.get_all()  
-    ui.populate_table(suspects)
-    ui.SuspectSearchBtn.clicked.connect(ui.search_suspects) 
-    Form.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     app = QtWidgets.QApplication(sys.argv)
+#     self = QtWidgets.QWidget()
+#     ui = Ui_self()
+#     ui.setupUi(self)
+#     suspects = Suspect.get_all()  
+#     ui.populate_table(suspects)
+#     ui.SuspectSearchBtn.clicked.connect(ui.search_suspects) 
+#     self.show()
+#     sys.exit(app.exec_())

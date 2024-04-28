@@ -11,16 +11,20 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Officers(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(1007, 678)
+class Officers(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi()
+
+    def setupUi(self):
+        self.setObjectName("Officers")
+        self.resize(1007, 678)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
-        Form.setSizePolicy(sizePolicy)
-        self.gridLayout_2 = QtWidgets.QGridLayout(Form)
+        sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
+        self.setSizePolicy(sizePolicy)
+        self.gridLayout_2 = QtWidgets.QGridLayout(self)
         self.gridLayout_2.setObjectName("gridLayout_2")
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout_2.addItem(spacerItem, 0, 1, 1, 1)
@@ -30,7 +34,7 @@ class Officers(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
-        self.OfficerSearchField = QtWidgets.QLineEdit(Form)
+        self.OfficerSearchField = QtWidgets.QLineEdit(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -41,7 +45,7 @@ class Officers(object):
         self.OfficerSearchField.setFont(font)
         self.OfficerSearchField.setObjectName("OfficerSearchField")
         self.horizontalLayout_2.addWidget(self.OfficerSearchField)
-        self.OfficerSearchBtn = QtWidgets.QPushButton(Form)
+        self.OfficerSearchBtn = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -55,7 +59,7 @@ class Officers(object):
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.gridLayout.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
-        self.OfficerScrollArea = QtWidgets.QScrollArea(Form)
+        self.OfficerScrollArea = QtWidgets.QScrollArea(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -70,14 +74,14 @@ class Officers(object):
         self.gridLayout.addWidget(self.OfficerScrollArea, 2, 0, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label = QtWidgets.QLabel(Form)
+        self.label = QtWidgets.QLabel(self)
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
-        self.AddOfficerBtn = QtWidgets.QPushButton(Form)
+        self.AddOfficerBtn = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -88,7 +92,7 @@ class Officers(object):
         self.AddOfficerBtn.setFont(font)
         self.AddOfficerBtn.setObjectName("AddOfficerBtn")
         self.horizontalLayout.addWidget(self.AddOfficerBtn)
-        self.BackBtn = QtWidgets.QPushButton(Form)
+        self.BackBtn = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -106,12 +110,11 @@ class Officers(object):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem4, 1, 2, 1, 1)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.setWindowTitle(_translate("Form", "Form"))
         self.OfficerSearchBtn.setText(_translate("Form", "Search"))
         self.label.setText(_translate("Form", "Officers"))
         self.AddOfficerBtn.setText(_translate("Form", "Add"))
