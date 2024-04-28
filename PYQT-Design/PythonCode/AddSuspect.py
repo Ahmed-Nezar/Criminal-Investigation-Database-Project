@@ -222,6 +222,13 @@ class AddSuspect(QtWidgets.QWidget):
         except:
             QtWidgets.QMessageBox.warning(self, 'Error', 'Suspect ID must be an integer')
             return
+        tmp = Suspect.get_all()
+        tmp = [x[0] for x in tmp]
+        
+        if suspect_id in tmp:
+            QtWidgets.QMessageBox.warning(self, 'Error', 'Suspect ID already exists')
+            return
+        
         suspect = Suspect(suspect_id, first_name, last_name, gender, dob, phone_record, street, government, zip)
         suspect.add_suspect()
         QtWidgets.QMessageBox.information(self, 'Success', 'Suspect added successfully')
