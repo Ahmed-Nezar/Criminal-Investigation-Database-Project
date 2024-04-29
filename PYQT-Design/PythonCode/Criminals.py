@@ -1,12 +1,12 @@
 import os
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Classes.Criminal import Criminal 
+
 
 curr_dir = os.path.dirname('systemdb\Classes\Criminal.py')
 parent_dir = os.path.dirname(curr_dir)
 sys.path.insert(0, parent_dir)
-
+from Classes.Criminal import Criminal 
 
 
 class Criminals(QtWidgets.QWidget):
