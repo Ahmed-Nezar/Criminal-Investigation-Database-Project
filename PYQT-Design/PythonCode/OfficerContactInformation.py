@@ -147,7 +147,7 @@ class OfficerContactInformation(QtWidgets.QWidget):
             if contact_infos == []:
                 msg = QtWidgets.QMessageBox()
                 msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText("No Criminal Records found")
+                msg.setText("No Officer Records found")
                 msg.setWindowTitle("Search")
                 msg.exec_()
             else:
