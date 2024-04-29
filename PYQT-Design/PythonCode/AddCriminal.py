@@ -11,12 +11,13 @@
 import os
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Classes.Criminal import Criminal 
+ 
 
 curr_dir = os.path.dirname('systemdb\Classes\Criminal.py')
 parent_dir = os.path.dirname(curr_dir)
 sys.path.insert(0, parent_dir)
-
+from Classes.Criminal import Criminal
+from Classes.CriminalRecord import CriminalRecord
 
 class AddCriminal(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -186,6 +187,7 @@ class AddCriminal(QtWidgets.QWidget):
             msg.exec_()
             return
         criminal = Criminal(criminal_id, first_name, last_name, status, description)
+        crecord=CriminalRecord(criminal_id,description)
         criminal.insert_into_database()
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Information)
