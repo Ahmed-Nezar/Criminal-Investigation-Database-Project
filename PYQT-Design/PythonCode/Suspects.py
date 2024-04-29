@@ -144,6 +144,8 @@ class Suspects(QtWidgets.QWidget):
             remove_button = QtWidgets.QPushButton("Remove")
             remove_button.clicked.connect(lambda _, suspect=suspect: self.remove_suspect(suspect))
             self.SuspectTable.setCellWidget(i, len(suspect), remove_button)
+        self.SuspectTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.SuspectTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
 
     def search_suspects(self):

@@ -125,7 +125,9 @@ class CriminalCrimeRecord(QtWidgets.QWidget):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.CriminalTable.setItem(i, j, item)
         self.CriminalTable.resizeColumnsToContents()
-
+        self.CriminalTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.CriminalTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        
     def search_table(self):
         self.crime_records = CrimeRecord.return_view()
         search_value = self.CriminalCrimeRecordSearchField.text()

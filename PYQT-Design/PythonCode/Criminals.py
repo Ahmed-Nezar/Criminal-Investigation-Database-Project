@@ -149,7 +149,8 @@ class Criminals(QtWidgets.QWidget):
             remove_button.clicked.connect(lambda _, criminal=criminal: self.remove_criminal(criminal))
             self.CriminalsTable.setCellWidget(i, len(criminal), remove_button)
         self.CriminalsTable.resizeColumnsToContents()
-
+        self.CriminalsTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.CriminalsTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
     def search_criminals(self):
         search_value = self.CriminalSearchField.text()

@@ -147,6 +147,8 @@ class Victims(QtWidgets.QWidget):
             remove_btn = QtWidgets.QPushButton("Remove")
             remove_btn.clicked.connect(lambda _, victim=victim: self.remove_victim(victim))
             self.VictimTable.setCellWidget(i, 7, remove_btn)
+        self.VictimTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.VictimTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
     def search_victims(self):
         search_value = self.VictimSearchField.text()

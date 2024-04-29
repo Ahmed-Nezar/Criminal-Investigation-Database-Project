@@ -145,7 +145,8 @@ class Witnesses(QtWidgets.QWidget):
             remove_button = QtWidgets.QPushButton("Remove")
             remove_button.clicked.connect(lambda _, Witness=Witness: self.remove_Witnesses(Witness))
             self.WitnessTable.setCellWidget(i, len(Witness), remove_button)
-
+        self.WitnessTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.WitnessTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
     def search_Witnesses(self):
         search_value = self.WitnessSearchField.text()
         self.WitnessSearchField.clear() 

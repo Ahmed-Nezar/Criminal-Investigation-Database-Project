@@ -125,6 +125,8 @@ class OfficerArrests(QtWidgets.QWidget):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.OfficerArrestTable.setItem(i, j, item)
         self.OfficerArrestTable.resizeColumnsToContents()
+        self.OfficerArrestTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.OfficerArrestTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
     def search_table(self):
         self.arrest_records = Arrest.return_view()

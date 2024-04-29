@@ -147,7 +147,9 @@ class Cases(QtWidgets.QWidget):
             remove_button.clicked.connect(lambda _, Case=Case: self.remove_Case(Case))
             self.CasesTable.setCellWidget(i, 6, remove_button)
         self.CasesTable.resizeColumnsToContents()
-        
+        self.CasesTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.CasesTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+
     def search_Cases(self):
         search_value = self.CaseSearchField.text()
         self.CaseSearchField.clear() 

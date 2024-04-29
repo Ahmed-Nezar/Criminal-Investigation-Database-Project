@@ -124,6 +124,8 @@ class OfficerContactInformation(QtWidgets.QWidget):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.OfficerContactInfoTable.setItem(i, j, item)
             self.OfficerContactInfoTable.resizeColumnsToContents()
+        self.OfficerContactInfoTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.OfficerContactInfoTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
     def search_table(self):
         self.contact_infos_records = OfficerContactInfo.return_view()
