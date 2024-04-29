@@ -157,6 +157,8 @@ class Officers(QtWidgets.QWidget):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.officersTable.setItem(i, j, item)
         self.officersTable.resizeColumnsToContents()
+        self.officersTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.officersTable.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         
     def search_officers(self):
         search_value = self.OfficerSearchField.text()
