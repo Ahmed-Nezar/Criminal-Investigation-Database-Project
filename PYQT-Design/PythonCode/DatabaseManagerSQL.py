@@ -108,8 +108,11 @@ class DatabaseManagerSQL(QtWidgets.QWidget):
             model.setRowCount(len(result.index))
             
             # Populate the model with DataFrame data
-            for row in range(len(result.index)):
-                for col in range(len(result.columns)):
+            # Set the headers with column names
+            for col, col_name in enumerate(result.columns):
+                header_item = QStandardItem(col_name)
+                model.setHorizontalHeaderItem(col, header_item)
+                for row in range(len(result.index)):
                     item = QStandardItem(str(result.iloc[row, col]))
                     model.setItem(row, col, item)
             
@@ -123,6 +126,7 @@ class DatabaseManagerSQL(QtWidgets.QWidget):
             result_text = str(result)
             output_widget = QtWidgets.QTextEdit(result_text)
             self.OutSQLScrollArea.setWidget(output_widget)
+
 
 
 def writequery(code):
