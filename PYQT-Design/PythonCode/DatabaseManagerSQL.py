@@ -101,12 +101,12 @@ class DatabaseManagerSQL(QtWidgets.QWidget):
         if isinstance(result, pd.DataFrame):
             # Create a table view widget
             table_view = QTableView()
-            
+
             # Create a standard item model
             model = QStandardItemModel()
             model.setColumnCount(len(result.columns))
             model.setRowCount(len(result.index))
-            
+
             # Populate the model with DataFrame data
             # Set the headers with column names
             for col, col_name in enumerate(result.columns):
@@ -115,10 +115,17 @@ class DatabaseManagerSQL(QtWidgets.QWidget):
                 for row in range(len(result.index)):
                     item = QStandardItem(str(result.iloc[row, col]))
                     model.setItem(row, col, item)
-            
+
             # Set the model to the table view
             table_view.setModel(model)
-            
+
+            # Set horizontal and vertical stretch factors
+            header = table_view.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+            v_header = table_view.verticalHeader()
+            v_header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
             # Set the table view as the widget in the scroll area
             self.OutSQLScrollArea.setWidget(table_view)
         else:
