@@ -1,5 +1,5 @@
 import pyodbc
-from globalFunc import *
+from .globalFunc import *
 
 class Affects:
     def __init__(self, CaseID, VictimID):
