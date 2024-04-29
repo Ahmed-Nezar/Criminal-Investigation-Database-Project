@@ -119,12 +119,11 @@ class OfficerContactInformation(QtWidgets.QWidget):
     def populate_table(self):
         self.contact_infos_records = OfficerContactInfo.return_view()
         self.OfficerContactInfoTable.setRowCount(len(self.contact_infos_records))
-        
         for i, contact_info in enumerate(self.contact_infos_records):
             for j, data in enumerate(contact_info):
                 item = QtWidgets.QTableWidgetItem(str(data))
                 self.OfficerContactInfoTable.setItem(i, j, item)
-        self.OfficerContactInfoTable.resizeColumnsToContents()
+            self.OfficerContactInfoTable.resizeColumnsToContents()
 
     def search_table(self):
         self.contact_infos_records = OfficerContactInfo.return_view()

@@ -10,6 +10,7 @@ class OfficerContactInfo:
     def insert_into_database(self):
         try:
             values = (self.OfficerID, self.Email, self.PhoneNo)
+            print(values)
             insert_into_table("OfficerContactInfo", [values])
 
         except pyodbc.Error as e:

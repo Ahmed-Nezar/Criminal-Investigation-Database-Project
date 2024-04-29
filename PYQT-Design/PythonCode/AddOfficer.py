@@ -258,8 +258,8 @@ class AddOfficer(QtWidgets.QWidget):
             return
         officer = Officer(officer_id, first_name, last_name,dob, gender,  badgenumber,rank, SupervisorID, StationID)
         officer_contact = OfficerContactInfo(officer_id, Email, Phone)
-        officer_contact.insert_into_database()
         officer.insert_into_database()
+        officer_contact.insert_into_database()
         QtWidgets.QMessageBox.warning(self, 'Sucess', 'Officer Added Successfully')
         self.OfficerIDField.clear()
         self.OfficerFnField.clear()

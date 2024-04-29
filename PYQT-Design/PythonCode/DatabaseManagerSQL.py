@@ -82,14 +82,20 @@ class DatabaseManagerSQL(QtWidgets.QWidget):
         self.BackBtn.setText(_translate("self", "Back"))
 
     def execute_sql_query(self):
-        # Get the SQL query from the text field
+    # Get the SQL query from the text field
         sql_query = self.SQLField.toPlainText()
 
-        # Call the writequery function with the SQL query
-        result = writequery(sql_query)
-        
-        # Display the result in the output text area
-        self.show_result(result)
+        try:
+            # Call the writequery function with the SQL query
+            result = writequery(sql_query)
+            
+            # Display the result in the output text area
+            self.show_result(result)
+        except Exception as e:
+            # If an error occurs, display the error message
+            error_message = f"Error executing SQL query:\n{str(e)}"
+            error_widget = QtWidgets.QTextEdit(error_message)
+            self.OutSQLScrollArea.setWidget(error_widget)
 
     def show_result(self, result):
         if isinstance(result, pd.DataFrame):
