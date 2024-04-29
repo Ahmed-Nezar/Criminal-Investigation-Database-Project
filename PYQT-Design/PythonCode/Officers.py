@@ -172,7 +172,7 @@ class Officers(QtWidgets.QWidget):
             if not self.officers:
                 msg = QtWidgets.QMessageBox()
                 msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText("No suspects found")
+                msg.setText("No Officer found")
                 msg.setWindowTitle("Search")
                 msg.exec_()
             else:
