@@ -270,6 +270,8 @@ class AddOfficer(QtWidgets.QWidget):
         self.OfficerRankField.clear()
         self.OfficerSuperField.clear()
         self.OfficerStationField.clear()
+        self.OfficerEmailField.clear()
+        self.OfficerPhoneField.clear()
 
 # if __name__ == "__main__":
 #     import sys
