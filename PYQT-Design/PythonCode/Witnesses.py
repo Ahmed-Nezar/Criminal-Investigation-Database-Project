@@ -150,6 +150,11 @@ class Witnesses(QtWidgets.QWidget):
         search_value = self.WitnessSearchField.text()
         self.WitnessSearchField.clear() 
         if search_value:
+            try:
+                search_value = int(search_value)
+            except:
+                QtWidgets.QMessageBox.warning(self, 'Error', 'Please enter a valid ID')
+                return
             self.Witnesses = Witness.search(search_value)
             if not self.Witnesses:
                 msg = QtWidgets.QMessageBox()

@@ -284,7 +284,7 @@ class AddSuspect(QtWidgets.QWidget):
         involved_in.insert_into_database()
         suspect.insert_into_database()
         criminal_record.insert_into_database()
-        QtWidgets.QMessageBox.Information(self, 'Success', 'Suspect added successfully')
+        QtWidgets.QMessageBox.warning(self, 'Sucess', 'Suspect is Added Successfully')
         self.SuspectIDField.clear()
         self.SuspectFirstNameField.clear()
         self.SuspectLastNameField.clear()

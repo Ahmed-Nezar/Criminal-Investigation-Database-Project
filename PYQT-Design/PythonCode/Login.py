@@ -78,7 +78,10 @@ class Login(QtWidgets.QWidget):
         self.LoginSubmitBtn.setText(_translate("Form", "Submit"))
 
     def ValidateLogin(self) -> bool:
-        ID = int(self.ID_Field.text())
+        try:   
+            ID = int(self.ID_Field.text())
+        except:
+            return False
         officers = Officer.get_columns("OfficerID")
         if ID in officers:
             return True

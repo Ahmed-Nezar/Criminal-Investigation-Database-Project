@@ -252,6 +252,7 @@ class AddOfficer(QtWidgets.QWidget):
             QtWidgets.QMessageBox.warning(self, 'Error', 'Supervisor ID must exists')
             return
         tmp=PoliceStation.get_all()
+        tmp = [x[0] for x in tmp]
         if StationID not in tmp:
             QtWidgets.QMessageBox.warning(self, 'Error', 'Station ID must exists')
             return
@@ -259,7 +260,7 @@ class AddOfficer(QtWidgets.QWidget):
         officer_contact = OfficerContactInfo(officer_id, Email, Phone)
         officer_contact.insert_into_database()
         officer.insert_into_database()
-        QtWidgets.QMessageBox.inselfation(self, 'Success', 'Officer added successfully')
+        QtWidgets.QMessageBox.warning(self, 'Sucess', 'Officer Added Successfully')
         self.OfficerIDField.clear()
         self.OfficerFnField.clear()
         self.OfficerLn.clear()

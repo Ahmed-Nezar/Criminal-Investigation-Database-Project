@@ -152,11 +152,16 @@ class Victims(QtWidgets.QWidget):
         search_value = self.VictimSearchField.text()
         self.VictimSearchField.clear() 
         if search_value:
+            try:
+                search_value = int(search_value)
+            except:
+                QtWidgets.QMessageBox.warning(self, "Search", "Invalid search value")
+                return
             self.victims = Victim.search(search_value)
             if not self.victims:
                 msg = QtWidgets.QMessageBox()
                 msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText("No suspects found")
+                msg.setText("No Victim found")
                 msg.setWindowTitle("Search")
                 msg.exec_()
             else:

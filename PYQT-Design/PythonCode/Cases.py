@@ -152,6 +152,11 @@ class Cases(QtWidgets.QWidget):
         search_value = self.CaseSearchField.text()
         self.CaseSearchField.clear() 
         if search_value:
+            try:
+                search_value = int(search_value)
+            except:
+                QtWidgets.QMessageBox.warning(self, "Search", "Please enter a valid CaseID")
+                return
             self.Cases = Case.search(search_value)
             if not self.Cases:
                 msg = QtWidgets.QMessageBox()

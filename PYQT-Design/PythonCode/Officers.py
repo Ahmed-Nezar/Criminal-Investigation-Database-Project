@@ -160,12 +160,18 @@ class Officers(QtWidgets.QWidget):
         
     def search_officers(self):
         search_value = self.OfficerSearchField.text()
+
         self.OfficerSearchField.clear() 
         if search_value:
+            try:
+                search_value = int(search_value)
+            except:
+                QtWidgets.QMessageBox.warning(self, 'Invalid Input', 'Please enter a valid officer ID')
+                return
             self.officers = Officer.search(search_value)
             if not self.officers:
                 msg = QtWidgets.QMessageBox()
-                msg.setIcon(QtWidgets.QMessageBox.Inselfation)
+                msg.setIcon(QtWidgets.QMessageBox.Information)
                 msg.setText("No suspects found")
                 msg.setWindowTitle("Search")
                 msg.exec_()

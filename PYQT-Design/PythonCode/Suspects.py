@@ -121,6 +121,8 @@ class Suspects(QtWidgets.QWidget):
         self.SuspectTable.setColumnCount(10) # Number of columns
         self.SuspectTable.setHorizontalHeaderLabels(['SuspectID', 'First Name', 'Last Name', 'Gender', 'Date of Birth', 'Phone Record', ' Street', ' Government', ' ZIP', 'Remove'])
         self.gridLayout.addWidget(self.SuspectTable, 2, 0, 1, 1)
+        
+        self.SuspectSearchBtn.clicked.connect(self.search_suspects)
 
         self.retranslateUi()
 
@@ -148,10 +150,15 @@ class Suspects(QtWidgets.QWidget):
         search_value = self.SuspectSearchField.text()
         self.SuspectSearchField.clear() 
         if search_value:
+            try:
+                search_value = int(search_value)
+            except:
+                QtWidgets.QMessageBox.warning(self, "Search", "Please enter a valid suspect ID")
+                return
             self.suspects = Suspect.search(search_value)
             if not self.suspects:
                 msg = QtWidgets.QMessageBox()
-                msg.setIcon(QtWidgets.QMessageBox.Inselfation)
+                msg.setIcon(QtWidgets.QMessageBox.Information)
                 msg.setText("No suspects found")
                 msg.setWindowTitle("Search")
                 msg.exec_()
